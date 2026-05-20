@@ -1,6 +1,6 @@
+// Definindo Classes
 class Vaga {
-  constructor(id, empresa, cargo, requisitos, salario, modalidade
-  ) {
+  constructor(id, empresa, cargo, requisitos, salario, modalidade) {
     this.id = id;
     this.empresa = empresa;
     this.cargo = cargo;
@@ -9,155 +9,585 @@ class Vaga {
     this.modalidade = modalidade;
   }
 
+  mostrarCompatibilidade(compatibilidadeInfo) {
+    let classificacao;
+
+    if (compatibilidadeInfo.compatibilidade >= 80) {
+      classificacao = "Alta compatibilidade";
+    } else if (compatibilidadeInfo.compatibilidade >= 50) {
+      classificacao = "Média compatibilidade";
+    } else {
+      classificacao = "Baixa compatibilidade";
+    }
+
+    return classificacao;
+  }
+
+  exibirCompatibilidade(compatibilidadeInfo) {
+    return (
+      "Empresa: " +
+      this.empresa +
+      "\nCargo: " +
+      this.cargo +
+      "\nCompatibilidade: " +
+      compatibilidadeInfo.compatibilidade +
+      "%" +
+      "\nHabilidades encontradas: " +
+      (compatibilidadeInfo.requisitosAtendidos.length > 0
+        ? compatibilidadeInfo.requisitosAtendidos.join(", ")
+        : "Nenhum requisito foi atendido") +
+      "\nHabilidades faltantes: " +
+      (compatibilidadeInfo.requisitosNaoAtendidos.length > 0
+        ? compatibilidadeInfo.requisitosNaoAtendidos.join(", ")
+        : "Todos os requisitos foram atendidos") +
+      "\nClassificação: " +
+      this.mostrarCompatibilidade(compatibilidadeInfo)
+    );
+  }
+
   exibirResumo() {
-     return `${this.cargo} na empresa ${this.empresa}`;
+    return (
+      "Id: " +
+      this.id +
+      "\nEmpresa: " +
+      this.empresa +
+      "\nCargo: " +
+      this.cargo +
+      "\nRequisitos: " +
+      this.requisitos.join(", ") +
+      "\nSalário: R$" +
+      this.salario.toFixed(2) +
+      "\nModalidade: " +
+      this.modalidade
+    );
+  }
+
+  calcularCompatibilidade(candidato) {
+    let requisitosNaoAtendidos = [];
+    let requisitosAtendidos = [];
+    let compatibilidade;
+
+    if (
+      !this.requisitos.every((requisito) =>
+        candidato.habilidades.includes(requisito),
+      )
+    ) {
+      for (const requisito of this.requisitos) {
+        if (candidato.habilidades.includes(requisito)) {
+          requisitosAtendidos.push(requisito);
+        } else {
+          requisitosNaoAtendidos.push(requisito);
+        }
+      }
+      compatibilidade =
+        (requisitosAtendidos.length / this.requisitos.length) * 100;
+    } else {
+      requisitosAtendidos = this.requisitos;
+      compatibilidade = 100;
+    }
+
+    return new CompatibilidadeInfo(
+      this.id,
+      compatibilidade.toFixed(2),
+      requisitosAtendidos,
+      requisitosNaoAtendidos,
+    );
   }
 }
 
 class VagaFrontEnd extends Vaga {
   constructor(id, empresa, cargo, requisitos, salario, modalidade, nivel) {
     super(id, empresa, cargo, requisitos, salario, modalidade);
-
     this.nivel = nivel;
   }
 
-  exibirNivel() {
-    return `Nível da vaga: ${this.nivel}`;
+  exibirCompatibilidade(compatibilidadeInfo) {
+    return (
+      "Empresa: " +
+      this.empresa +
+      "\nCargo: " +
+      this.cargo +
+      "\nCompatibilidade: " +
+      compatibilidadeInfo.compatibilidade +
+      "%" +
+      "\nHabilidades encontradas: " +
+      (compatibilidadeInfo.requisitosAtendidos.length > 0
+        ? compatibilidadeInfo.requisitosAtendidos.join(", ")
+        : "Nenhum requisito foi atendido") +
+      "\nHabilidades faltantes: " +
+      (compatibilidadeInfo.requisitosNaoAtendidos.length > 0
+        ? compatibilidadeInfo.requisitosNaoAtendidos.join(", ")
+        : "Todos os requisitos foram atendidos") +
+      "\nClassificação: " +
+      this.mostrarCompatibilidade(compatibilidadeInfo) +
+      "\nNível: " +
+      this.nivel
+    );
+  }
+
+  exibirResumo() {
+    return (
+      "Id: " +
+      this.id +
+      "\nEmpresa: " +
+      this.empresa +
+      "\nCargo: " +
+      this.cargo +
+      "\nRequisitos: " +
+      this.requisitos.join(", ") +
+      "\nSalário: R$" +
+      this.salario.toFixed(2) +
+      "\nModalidade: " +
+      this.modalidade +
+      "\nNível: " +
+      this.nivel
+    );
+  }
+}
+class CompatibilidadeInfo {
+  constructor(
+    idVaga,
+    compatibilidade,
+    requisitosAtendidos,
+    requisitosNaoAtendidos,
+  ) {
+    this.idVaga = idVaga;
+    this.compatibilidade = compatibilidade;
+    this.requisitosAtendidos = requisitosAtendidos;
+    this.requisitosNaoAtendidos = requisitosNaoAtendidos;
+  }
+}
+class Candidato {
+  constructor(nome, area, email, senha, habilidades, experienciaMeses) {
+    this.nome = nome;
+    this.area = area;
+    this.email = email;
+    this.senha = senha;
+    this.habilidades = habilidades;
+    this.experienciaMeses = experienciaMeses;
+  }
+
+  exibirResumo() {
+    return (
+      "Nome: " +
+      this.nome +
+      "\nEmail: " +
+      this.email +
+      "\nArea: " +
+      this.area +
+      "\nHabilidades: " +
+      this.habilidades.join(", ") +
+      "\nExperiência: " +
+      this.experienciaMeses +
+      " meses"
+    );
   }
 }
 
-const candidato = {
-    nome: "Ana",
-    area: "Front-End",
-    habilidades: ["JavaScript", "GitHub", "Lógica de Programação", "Kanban"],
-    experienciaMeses: 3
-};
+function processarVagas(vagas, callback) {
+  alert("Vagas processadas com sucesso!");
 
-const vagas = [
-    {
-    id: 1,
-    empresa: "TechStart",
-    cargo: "Desenvolvedor Front-End Júnior",
-    requisitos: ["JavaScript", "GitHub", "Lógica de Programação"],
-    salario: 2800,
-    modalidade: "Remoto",
-    nivel: "Júnior"
-    },
-    {
-    id: 2,
-    empresa: "CodeLab",
-    cargo: "Estágio Front-End",
-    requisitos: ["JavaScript", "Kanban", "GitHub"],
-    salario: 1800,
-    modalidade: "Híbrido",
-    nivel: "Estágio"
-    },
-    {
-    id: 3,
-    empresa: "WebSolutions",
-    cargo: "Programador JavaScript Júnior",
-    requisitos: ["JavaScript", "Arrays", "Objetos", "Funções"],
-    salario: 3000,
-    modalidade: "Presencial",
-    nivel: "Júnior"
-    }
-];
+  callback(vagas);
+}
 
-function calcularCompatibilidade(candidato, vaga) {
-  const requisitosAtendidos = [];
-  const requisitosNaoAtendidos = [];
+function mostrarQuantidadeVagas(vagas) {
+  alert("Foram encontradas " + vagas.length + " vagas.");
+}
 
-  for (const requisito of vaga.requisitos) {
-    if (candidato.habilidades.includes(requisito)) {
-      requisitosAtendidos.push(requisito);
+function criarContadorBuscas() {
+  let buscas = 0;
+
+  return function () {
+    buscas++;
+    return buscas;
+  };
+}
+
+const contarBuscas = criarContadorBuscas();
+
+function verVagas(candidato, vagas) {
+  let abasVagas = [];
+
+  let recomendacaoDeEstudo = [];
+
+  let vagaComMaiorCompatibilidade = {
+    id: null,
+    compatibilidade: null,
+  };
+
+  let compatibilidades = [];
+
+  for (const indice in vagas) {
+    const vaga = vagas[indice];
+
+    abasVagas[indice] = "";
+
+    let compatibilidadeInfo = vaga.calcularCompatibilidade(candidato);
+    let requisitosNaoAtendidos = compatibilidadeInfo.requisitosNaoAtendidos;
+    let requisitosAtendidos = compatibilidadeInfo.requisitosAtendidos;
+    let compatibilidade = compatibilidadeInfo.compatibilidade;
+
+    requisitosNaoAtendidos.map((requisito) =>
+      recomendacaoDeEstudo.push(requisito),
+    );
+
+    abasVagas[indice] += vaga.exibirResumo();
+
+    if (requisitosNaoAtendidos.length === 0) {
+      abasVagas[indice] +=
+        "Para a vaga da " + vaga.empresa + ", não falta nenhum requisito";
     } else {
-      requisitosNaoAtendidos.push(requisito);
+      abasVagas[indice] +=
+        "Para a vaga da " +
+        vaga.empresa +
+        ", faltam:\n" +
+        "- " +
+        requisitosNaoAtendidos.join("\n- ");
     }
+
+    if (
+      vagaComMaiorCompatibilidade.compatibilidade === null ||
+      vagaComMaiorCompatibilidade.compatibilidade < compatibilidade
+    ) {
+      vagaComMaiorCompatibilidade.id = vaga.id;
+      vagaComMaiorCompatibilidade.compatibilidade = compatibilidade;
+    }
+
+    compatibilidades.push(compatibilidadeInfo);
   }
 
-  const compatibilidade =
-    (requisitosAtendidos.length /
-      vaga.requisitos.length) * 100;
-
-  let classificacao = "";
-
-  if (compatibilidade >= 80) {
-    classificacao = "Alta compatibilidade";
-  } else if (compatibilidade >= 50) {
-    classificacao = "Média compatibilidade";
-  } else {
-    classificacao = "Baixa compatibilidade";
-  }
-
-  console.log("Empresa: "+vaga.empresa+
-    "\nCargo: "+vaga.cargo+
-    "\mCompatibilidade: "+compatibilidade+"%"+
-    "\nHabilidades encontradas: "+requisitosAtendidos.join(", ")+
-    "\nHabilidades faltantes: "+requisitosNaoAtendidos.join(", ")+
-    "\nClassificação: "+classificacao
+  let vagaEncontrada = vagas.find(
+    (vaga) => vaga.id === vagaComMaiorCompatibilidade.id,
   );
+
+  let mensagem =
+    "Primeira vaga mais compatível:\n" +
+    vagaEncontrada.empresa +
+    " - " +
+    vagaEncontrada.cargo +
+    "\nCompatibilidade: " +
+    vagaComMaiorCompatibilidade.compatibilidade +
+    "%";
+
+  if (recomendacaoDeEstudo.length !== 0) {
+    mensagem +=
+      "\n\nRecomendações de estudo:\n" +
+      "Priorize estudar " +
+      recomendacaoDeEstudo.join(", ") +
+      ", pois esses conteúdos aparecem nas vagas analisadas.";
+  }
+
+  let input;
+
+  let pergunta = "\n\nQual aba deseja abrir? ";
+
+  for (let i = 0; i < abasVagas.length; i++) {
+    pergunta += i + 1 + " / ";
+  }
+
+  pergunta += "x - sair";
+
+  do {
+    input = prompt(mensagem + pergunta);
+
+    if (isNaN(Number(input)) && input !== "x") {
+      alert("Digite um opção válida");
+      continue;
+    }
+
+    if (input === "x") {
+      continue;
+    }
+
+    alert(abasVagas[Number(input) - 1]);
+  } while (input !== "x");
+
+  return compatibilidades;
+}
+
+function mostrarVagas(candidato, vagas = []) {
+  let compatibilidades = verVagas(candidato, vagas);
+
+  let input;
+
+  do {
+    input = prompt(
+      "Busca feitas até agora: " +
+        contarBuscas() +
+        "\n\n" +
+        "O que deseja fazer?\n" +
+        "1 - Rever vagas\n" +
+        "2 - Ver sua compatibilidade com uma vaga\n" +
+        "x - Voltar a tela principal",
+    );
+
+    switch (input) {
+      case "1":
+        verVagas(candidato, vagas);
+        break;
+
+      case "2":
+        let escolha = prompt("Digite o id da vaga desejada");
+
+        if (vagas.find((vaga) => vaga.id === Number(escolha))) {
+          let vaga = vagas.find((vaga) => vaga.id === Number(escolha));
+          let compatibilidadeInfo = compatibilidades.find(
+            (compatibilidade) => compatibilidade.idVaga === Number(escolha),
+          );
+
+          alert(vaga.exibirCompatibilidade(compatibilidadeInfo));
+        } else {
+          alert("Opção inválida.");
+        }
+        break;
+
+      default:
+        if (input !== "x") {
+          alert("Opção inválida.");
+        }
+        break;
+    }
+  } while (input !== "x");
+}
+
+function buscarCandidatosSimulados() {
+  const candidatos = [
+    {
+      nome: "Ana",
+      area: "Front-End",
+      email: "ana@email.com",
+      senha: "123",
+      habilidades: ["JavaScript", "GitHub", "Lógica de Programação", "Kanban"],
+      experienciaMeses: 3,
+    },
+    {
+      nome: "Carlos",
+      area: "Front-End",
+      email: "carlos@email.com",
+      senha: "123",
+      habilidades: ["HTML", "CSS", "JavaScript", "React"],
+      experienciaMeses: 8,
+    },
+    {
+      nome: "Marina",
+      area: "Front-End",
+      email: "marina@email.com",
+      senha: "123",
+      habilidades: ["JavaScript", "GitHub", "Figma"],
+      experienciaMeses: 5,
+    },
+    {
+      nome: "Lucas",
+      area: "Front-End",
+      email: "lucas@email.com",
+      senha: "123",
+      habilidades: ["JavaScript", "TypeScript", "React", "GitHub"],
+      experienciaMeses: 12,
+    },
+    {
+      nome: "Fernanda",
+      area: "Front-End",
+      email: "fernanda@email.com",
+      senha: "123",
+      habilidades: ["HTML", "CSS", "Bootstrap", "Kanban"],
+      experienciaMeses: 2,
+    },
+    {
+      nome: "Rafael",
+      area: "Front-End",
+      email: "rafael@email.com",
+      senha: "123",
+      habilidades: ["JavaScript", "Vue.js", "Git", "Lógica de Programação"],
+      experienciaMeses: 10,
+    },
+    {
+      nome: "Juliana",
+      area: "Front-End",
+      email: "juliana@email.com",
+      senha: "123",
+      habilidades: ["React", "GitHub", "Kanban", "APIs"],
+      experienciaMeses: 6,
+    },
+    {
+      nome: "Pedro",
+      area: "Front-End",
+      email: "pedro@email.com",
+      senha: "123",
+      habilidades: ["JavaScript", "Node.js", "Git", "SCRUM"],
+      experienciaMeses: 9,
+    },
+  ];
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        candidatos.map(
+          (candidato) =>
+            new Candidato(
+              candidato.nome,
+              candidato.area,
+              candidato.email,
+              candidato.senha,
+              candidato.habilidades,
+              candidato.experienciaMeses,
+            ),
+        ),
+      );
+    }, 1000);
+  });
+}
+
+async function buscarCandidatos() {
+  alert("Buscando candidatos...");
+  const vagasCarregadas = await buscarCandidatosSimulados();
+  alert("Candidatos encontrados.");
+  return vagasCarregadas;
+}
+
+async function verificarEmailSenha(input) {
+  let resultado = {
+    candidato: undefined,
+    loginRealizado: false,
+  };
+  const candidatosCarregados = await buscarCandidatos();
+
+  let candidatoEncontrado = candidatosCarregados.find(
+    (candidato) => candidato.email === input.email,
+  );
+
+  if (candidatoEncontrado !== undefined) {
+    resultado.candidato = candidatoEncontrado;
+    resultado.loginRealizado = candidatoEncontrado.senha === input.senha;
+
+    return resultado;
+  } else {
+    return resultado;
+  }
+}
+
+async function realizarLogin() {
+  let email = prompt("Digite o seu email");
+  let senha = prompt("Digite a sua senha");
+
+  let resposta = await verificarEmailSenha({ email: email, senha: senha });
+
+  return resposta;
 }
 
 function buscarVagasSimuladas() {
-
-const vagas = [
+  const vagas = [
     {
-    id: 1,
-    empresa: "TechStart",
-    cargo: "Desenvolvedor Front-End Júnior",
-    requisitos: ["JavaScript", "GitHub", "Lógica de Programação"],
-    salario: 2800,
-    modalidade: "Remoto",
-    nivel: "Júnior"
+      id: 1,
+      empresa: "TechStart",
+      cargo: "Desenvolvedor Front-End Júnior",
+      requisitos: ["JavaScript", "GitHub", "Lógica de Programação"],
+      salario: 2800,
+      modalidade: "Remoto",
+      nivel: "Júnior",
     },
     {
-    id: 2,
-    empresa: "CodeLab",
-    cargo: "Estágio Front-End",
-    requisitos: ["JavaScript", "Kanban", "GitHub"],
-    salario: 1800,
-    modalidade: "Híbrido",
-    nivel: "Estágio"
+      id: 2,
+      empresa: "CodeLab",
+      cargo: "Estágio Front-End",
+      requisitos: ["JavaScript", "Kanban", "GitHub"],
+      salario: 1800,
+      modalidade: "Híbrido",
+      nivel: "Estágio",
     },
     {
-    id: 3,
-    empresa: "WebSolutions",
-    cargo: "Programador JavaScript Júnior",
-    requisitos: ["JavaScript", "Arrays", "Objetos", "Funções"],
-    salario: 3000,
-    modalidade: "Presencial",
-    nivel: "Júnior"
-    }
-];
+      id: 3,
+      empresa: "WebSolutions",
+      cargo: "Programador JavaScript Júnior",
+      requisitos: ["JavaScript", "Arrays", "Objetos", "Funções"],
+      salario: 3000,
+      modalidade: "Presencial",
+      nivel: "Júnior",
+    },
+  ];
 
-return new Promise((resolve) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-    resolve(vagas.map(vaga => new VagaFrontEnd(
-        vaga.id, 
-        vaga.empresa, 
-        vaga.cargo, 
-        vaga.requisitos, 
-        vaga.salario, 
-        vaga.modalidade,
-        vaga.nivel
-    )));
+      resolve(
+        vagas.map(
+          (vaga) =>
+            new VagaFrontEnd(
+              vaga.id,
+              vaga.empresa,
+              vaga.cargo,
+              vaga.requisitos,
+              vaga.salario,
+              vaga.modalidade,
+              vaga.nivel,
+            ),
+        ),
+      );
     }, 1000);
-});
+  });
 }
 
 async function buscarVagas() {
-    console.log("Buscando vagas...");
-    const vagasCarregadas = await buscarVagasSimuladas();
-    console.log("Vagas carregadas.")
+  alert("Buscando vagas...");
+  const vagasCarregadas = await buscarVagasSimuladas();
 
-    return vagasCarregadas;
+  processarVagas(vagasCarregadas, mostrarQuantidadeVagas);
+
+  return vagasCarregadas;
 }
 
-async function iniciarSistema() {
+async function introducao() {
+  let loginRealizado = false;
 
-  const vagas = await buscarVagas();
+  let mensagem = "";
 
-  console.log(vagas);
+  let candidatoAtual;
+
+  do {
+    mensagem = prompt(
+      "Bem-vindo ao SkillMatch JS\n\n" +
+        "O que deseja fazer?\n" +
+        "1 - mostrar todas vagas disponíveis\n" +
+        "2 - mostrar perfil do usuário\n" +
+        "3 - fazer o login\n" +
+        "x - sair",
+    );
+
+    switch (mensagem) {
+      case "1":
+        if (loginRealizado === false) {
+          alert("Faça o login para acessar");
+          break;
+        }
+        let vagas = await buscarVagas();
+
+        await mostrarVagas(candidatoAtual, vagas);
+        break;
+
+      case "2":
+        if (loginRealizado === false) {
+          alert("Faça o login para acessar");
+          break;
+        }
+        alert(candidatoAtual.exibirResumo());
+        break;
+
+      case "3":
+        let resposta = await realizarLogin();
+        if (resposta.loginRealizado) {
+          candidatoAtual = resposta.candidato;
+          loginRealizado = true;
+          alert("Login realizado com sucesso");
+        } else {
+          alert("Login não realizado");
+        }
+        break;
+
+      default:
+        if (mensagem !== "x") {
+          alert("Opção inválida.");
+        }
+        break;
+    }
+  } while (mensagem !== "x");
 }
 
-iniciarSistema();
+introducao();
