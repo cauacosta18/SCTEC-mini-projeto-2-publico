@@ -2,6 +2,25 @@
 
 ## Backlog
 
+---
+
+## A Fazer
+
+- Atualizar README.md
+- Gravar vídeo demonstrando o projeto
+- Enviar links no AVA
+
+---
+
+## Em Andamento
+
+---
+
+## Concluído
+
+- Criar repositório no GitHub
+- Criar arquivo skillmatch.js
+- Criar README.md
 - Criar objeto candidato
 - Criar array de vagas
 - Criar função para calcular compatibilidade
@@ -17,22 +36,3 @@
 - Criar Promise simulada
 - Criar função async/await
 - Testar o código final no console
-- Atualizar README.md
-- Gravar vídeo demonstrando o projeto
-- Enviar links no AVA
-
----
-
-## A Fazer
-
----
-
-## Em Andamento
-
----
-
-## Concluído
-
-- Criar repositório no GitHub
-- Criar arquivo skillmatch.js
-- Criar README.md
