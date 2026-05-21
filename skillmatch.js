@@ -1,4 +1,12 @@
-// Definindo Classes
+// |\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
+// |    SkillMatch JS: Simulador de Compatibilidade com Vaga Front-End Júnior   |
+// |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\|
+
+// ---------------------------------------------------------------------------
+
+// ==========================
+// Classes
+// ==========================
 class Vaga {
   constructor(id, empresa, cargo, requisitos, salario, modalidade) {
     this.id = id;
@@ -9,6 +17,7 @@ class Vaga {
     this.modalidade = modalidade;
   }
 
+  // Classifica a compatibilidade
   mostrarCompatibilidade(compatibilidadeInfo) {
     let classificacao;
 
@@ -23,6 +32,7 @@ class Vaga {
     return classificacao;
   }
 
+  // Mostra as informações de compatibilidade da vaga com um candidato
   exibirCompatibilidade(compatibilidadeInfo) {
     return (
       "Empresa: " +
@@ -45,6 +55,7 @@ class Vaga {
     );
   }
 
+  // Mostra um resumo das informações da vaga
   exibirResumo() {
     return (
       "Id: " +
@@ -62,6 +73,7 @@ class Vaga {
     );
   }
 
+  // Calcula a compatibilidade de uma vaga com um candidato
   calcularCompatibilidade(candidato) {
     let requisitosNaoAtendidos = [];
     let requisitosAtendidos = [];
@@ -88,60 +100,26 @@ class Vaga {
 
     return new CompatibilidadeInfo(
       this.id,
-      compatibilidade.toFixed(2),
+      Number(compatibilidade.toFixed(2)),
       requisitosAtendidos,
       requisitosNaoAtendidos,
     );
   }
 }
-
 class VagaFrontEnd extends Vaga {
   constructor(id, empresa, cargo, requisitos, salario, modalidade, nivel) {
     super(id, empresa, cargo, requisitos, salario, modalidade);
     this.nivel = nivel;
   }
 
+  // Nível da vaga adicionado nas informações apresentadas
   exibirCompatibilidade(compatibilidadeInfo) {
-    return (
-      "Empresa: " +
-      this.empresa +
-      "\nCargo: " +
-      this.cargo +
-      "\nCompatibilidade: " +
-      compatibilidadeInfo.compatibilidade +
-      "%" +
-      "\nHabilidades encontradas: " +
-      (compatibilidadeInfo.requisitosAtendidos.length > 0
-        ? compatibilidadeInfo.requisitosAtendidos.join(", ")
-        : "Nenhum requisito foi atendido") +
-      "\nHabilidades faltantes: " +
-      (compatibilidadeInfo.requisitosNaoAtendidos.length > 0
-        ? compatibilidadeInfo.requisitosNaoAtendidos.join(", ")
-        : "Todos os requisitos foram atendidos") +
-      "\nClassificação: " +
-      this.mostrarCompatibilidade(compatibilidadeInfo) +
-      "\nNível: " +
-      this.nivel
-    );
+    return super.exibirCompatibilidade(compatibilidadeInfo) + "\nNível da vaga: "+this.nivel;
   }
 
+  // Nível da vaga adicionado nas informações apresentadas
   exibirResumo() {
-    return (
-      "Id: " +
-      this.id +
-      "\nEmpresa: " +
-      this.empresa +
-      "\nCargo: " +
-      this.cargo +
-      "\nRequisitos: " +
-      this.requisitos.join(", ") +
-      "\nSalário: R$" +
-      this.salario.toFixed(2) +
-      "\nModalidade: " +
-      this.modalidade +
-      "\nNível: " +
-      this.nivel
-    );
+    return super.exibirResumo() + "\nNível da vaga: "+this.nivel;
   }
 }
 class CompatibilidadeInfo {
@@ -167,6 +145,7 @@ class Candidato {
     this.experienciaMeses = experienciaMeses;
   }
 
+  // Mostra um resumo das informações do candidato
   exibirResumo() {
     return (
       "Nome: " +
@@ -184,16 +163,13 @@ class Candidato {
   }
 }
 
-function processarVagas(vagas, callback) {
-  alert("Vagas processadas com sucesso!");
+// ---------------------------------------------------------------------------
 
-  callback(vagas);
-}
+// ==========================
+// Contador de Buscas
+// ==========================
 
-function mostrarQuantidadeVagas(vagas) {
-  alert("Foram encontradas " + vagas.length + " vagas.");
-}
-
+// Cria o contador de buscas
 function criarContadorBuscas() {
   let buscas = 0;
 
@@ -203,8 +179,16 @@ function criarContadorBuscas() {
   };
 }
 
+// Instancia o contador de buscas
 const contarBuscas = criarContadorBuscas();
 
+// ---------------------------------------------------------------------------
+
+// ==========================
+// Display das vagas
+// ==========================
+
+// Mostra o resumo de cada vaga
 function verVagas(candidato, vagas) {
   let abasVagas = [];
 
@@ -216,9 +200,9 @@ function verVagas(candidato, vagas) {
   };
 
   let compatibilidades = [];
+  let indice = 0;
 
-  for (const indice in vagas) {
-    const vaga = vagas[indice];
+  for (const vaga of vagas) {
 
     abasVagas[indice] = "";
 
@@ -227,18 +211,18 @@ function verVagas(candidato, vagas) {
     let requisitosAtendidos = compatibilidadeInfo.requisitosAtendidos;
     let compatibilidade = compatibilidadeInfo.compatibilidade;
 
-    requisitosNaoAtendidos.map((requisito) =>
-      recomendacaoDeEstudo.push(requisito),
-    );
+    for (const requisito of requisitosNaoAtendidos) {
+      recomendacaoDeEstudo.push(requisito);
+    }
 
     abasVagas[indice] += vaga.exibirResumo();
 
     if (requisitosNaoAtendidos.length === 0) {
       abasVagas[indice] +=
-        "Para a vaga da " + vaga.empresa + ", não falta nenhum requisito";
+        "\n\nPara a vaga da " + vaga.empresa + ", não falta nenhum requisito";
     } else {
       abasVagas[indice] +=
-        "Para a vaga da " +
+        "\n\nPara a vaga da " +
         vaga.empresa +
         ", faltam:\n" +
         "- " +
@@ -254,6 +238,8 @@ function verVagas(candidato, vagas) {
     }
 
     compatibilidades.push(compatibilidadeInfo);
+
+    indice++;
   }
 
   let vagaEncontrada = vagas.find(
@@ -290,8 +276,10 @@ function verVagas(candidato, vagas) {
   do {
     input = prompt(mensagem + pergunta);
 
+    input = input.toLowerCase();
+
     if (isNaN(Number(input)) && input !== "x") {
-      alert("Digite um opção válida");
+      alert("Digite uma opção válida");
       continue;
     }
 
@@ -305,6 +293,7 @@ function verVagas(candidato, vagas) {
   return compatibilidades;
 }
 
+// Permite o candidato ver mais informações sobre uma vaga
 function mostrarVagas(candidato, vagas = []) {
   let compatibilidades = verVagas(candidato, vagas);
 
@@ -312,14 +301,16 @@ function mostrarVagas(candidato, vagas = []) {
 
   do {
     input = prompt(
-      "Busca feitas até agora: " +
+      "Buscas feitas até agora: " +
         contarBuscas() +
         "\n\n" +
         "O que deseja fazer?\n" +
         "1 - Rever vagas\n" +
         "2 - Ver sua compatibilidade com uma vaga\n" +
-        "x - Voltar a tela principal",
+        "x - Voltar a tela de início",
     );
+
+    input = input.toLowerCase();
 
     switch (input) {
       case "1":
@@ -328,9 +319,9 @@ function mostrarVagas(candidato, vagas = []) {
 
       case "2":
         let escolha = prompt("Digite o id da vaga desejada");
+        let vaga = vagas.find((vaga) => vaga.id === Number(escolha));
 
-        if (vagas.find((vaga) => vaga.id === Number(escolha))) {
-          let vaga = vagas.find((vaga) => vaga.id === Number(escolha));
+        if (vaga !== undefined) {
           let compatibilidadeInfo = compatibilidades.find(
             (compatibilidade) => compatibilidade.idVaga === Number(escolha),
           );
@@ -350,6 +341,13 @@ function mostrarVagas(candidato, vagas = []) {
   } while (input !== "x");
 }
 
+// ---------------------------------------------------------------------------
+
+// ==========================
+// Processo de Login
+// ==========================
+
+// Armazena os candidatos e os retorna em forma de classe
 function buscarCandidatosSimulados() {
   const candidatos = [
     {
@@ -437,13 +435,15 @@ function buscarCandidatosSimulados() {
   });
 }
 
+// Busca os candidatos cadastrados
 async function buscarCandidatos() {
   alert("Buscando candidatos...");
-  const vagasCarregadas = await buscarCandidatosSimulados();
+  const candidatosCarregados = await buscarCandidatosSimulados();
   alert("Candidatos encontrados.");
-  return vagasCarregadas;
+  return candidatosCarregados;
 }
 
+// Verifica o email e senha do candidato
 async function verificarEmailSenha(input) {
   let resultado = {
     candidato: undefined,
@@ -465,6 +465,7 @@ async function verificarEmailSenha(input) {
   }
 }
 
+// Recebe o email e senha do candidato
 async function realizarLogin() {
   let email = prompt("Digite o seu email");
   let senha = prompt("Digite a sua senha");
@@ -474,6 +475,13 @@ async function realizarLogin() {
   return resposta;
 }
 
+// ---------------------------------------------------------------------------
+
+// ==========================
+// Processo de Busca de Vagas
+// ==========================
+
+// Armazena as vagas e as retorna em forma de classe
 function buscarVagasSimuladas() {
   const vagas = [
     {
@@ -525,6 +533,19 @@ function buscarVagasSimuladas() {
   });
 }
 
+// Mostra uma mensagem no fim do processamento das vagas
+function processarVagas(vagas, callback) {
+  alert("Vagas processadas com sucesso!");
+
+  callback(vagas);
+}
+
+// Mostra a quantidade de vagas cadastradas
+function mostrarQuantidadeVagas(vagas) {
+  alert("Foram encontradas " + vagas.length + " vagas.");
+}
+
+// Busca as vagas cadastradas
 async function buscarVagas() {
   alert("Buscando vagas...");
   const vagasCarregadas = await buscarVagasSimuladas();
@@ -534,15 +555,22 @@ async function buscarVagas() {
   return vagasCarregadas;
 }
 
+// ---------------------------------------------------------------------------
+
+// ==========================
+// Tela de início
+// ==========================
+
+// Permite o candidato acessar o sistema
 async function introducao() {
   let loginRealizado = false;
 
-  let mensagem = "";
+  let input = "";
 
   let candidatoAtual;
 
   do {
-    mensagem = prompt(
+    input = prompt(
       "Bem-vindo ao SkillMatch JS\n\n" +
         "O que deseja fazer?\n" +
         "1 - mostrar todas vagas disponíveis\n" +
@@ -551,7 +579,9 @@ async function introducao() {
         "x - sair",
     );
 
-    switch (mensagem) {
+    input = input.toLowerCase();
+
+    switch (input) {
       case "1":
         if (loginRealizado === false) {
           alert("Faça o login para acessar");
@@ -559,7 +589,7 @@ async function introducao() {
         }
         let vagas = await buscarVagas();
 
-        await mostrarVagas(candidatoAtual, vagas);
+        mostrarVagas(candidatoAtual, vagas);
         break;
 
       case "2":
@@ -582,12 +612,13 @@ async function introducao() {
         break;
 
       default:
-        if (mensagem !== "x") {
+        if (input !== "x") {
           alert("Opção inválida.");
         }
         break;
     }
-  } while (mensagem !== "x");
+  } while (input !== "x");
 }
 
+// Inicia o sistema
 introducao();
