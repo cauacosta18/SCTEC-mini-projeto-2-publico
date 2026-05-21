@@ -2,17 +2,17 @@
 
 ## Backlog
 
----
-
-## A Fazer
-
-- Atualizar README.md
-- Gravar vídeo demonstrando o projeto
 - Enviar links no AVA
 
 ---
 
+## A Fazer
+
+---
+
 ## Em Andamento
+
+- Gravar vídeo demonstrando o projeto
 
 ---
 
@@ -36,3 +36,4 @@
 - Criar Promise simulada
 - Criar função async/await
 - Testar o código final no console
+- Atualizar README.md
