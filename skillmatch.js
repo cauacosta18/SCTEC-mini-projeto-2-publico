@@ -301,9 +301,6 @@ function mostrarVagas(candidato, vagas = []) {
 
   do {
     input = prompt(
-      "Buscas feitas até agora: " +
-        contarBuscas() +
-        "\n\n" +
         "O que deseja fazer?\n" +
         "1 - Rever vagas\n" +
         "2 - Ver sua compatibilidade com uma vaga\n" +
@@ -511,6 +508,114 @@ function buscarVagasSimuladas() {
       modalidade: "Presencial",
       nivel: "Júnior",
     },
+    {
+      id: 4,
+      empresa: "PixelForge",
+      cargo: "Desenvolvedor React Júnior",
+      requisitos: ["React", "JavaScript", "GitHub"],
+      salario: 3500,
+      modalidade: "Remoto",
+      nivel: "Júnior",
+    },
+    {
+      id: 5,
+      empresa: "NextWave",
+      cargo: "Front-End Trainee",
+      requisitos: ["HTML", "CSS", "JavaScript"],
+      salario: 2200,
+      modalidade: "Híbrido",
+      nivel: "Trainee",
+    },
+    {
+      id: 6,
+      empresa: "VisionTech",
+      cargo: "Desenvolvedor Vue.js",
+      requisitos: ["Vue.js", "JavaScript", "Git"],
+      salario: 4000,
+      modalidade: "Remoto",
+      nivel: "Júnior",
+    },
+    {
+      id: 7,
+      empresa: "DevConnect",
+      cargo: "Estágio em Desenvolvimento Web",
+      requisitos: ["HTML", "CSS", "Kanban"],
+      salario: 1600,
+      modalidade: "Presencial",
+      nivel: "Estágio",
+    },
+    {
+      id: 8,
+      empresa: "SkySystems",
+      cargo: "Desenvolvedor Front-End React",
+      requisitos: ["React", "APIs", "GitHub"],
+      salario: 4200,
+      modalidade: "Híbrido",
+      nivel: "Pleno",
+    },
+    {
+      id: 9,
+      empresa: "ByteLabs",
+      cargo: "Programador TypeScript",
+      requisitos: ["TypeScript", "React", "GitHub"],
+      salario: 4500,
+      modalidade: "Remoto",
+      nivel: "Pleno",
+    },
+    {
+      id: 10,
+      empresa: "InovaWeb",
+      cargo: "Desenvolvedor Web Júnior",
+      requisitos: ["JavaScript", "SCRUM", "Git"],
+      salario: 3200,
+      modalidade: "Presencial",
+      nivel: "Júnior",
+    },
+    {
+      id: 11,
+      empresa: "AlphaCode",
+      cargo: "Front-End com Bootstrap",
+      requisitos: ["HTML", "CSS", "Bootstrap"],
+      salario: 2600,
+      modalidade: "Híbrido",
+      nivel: "Júnior",
+    },
+    {
+      id: 12,
+      empresa: "CreativeApps",
+      cargo: "UI Front-End Developer",
+      requisitos: ["Figma", "CSS", "JavaScript"],
+      salario: 3400,
+      modalidade: "Remoto",
+      nivel: "Júnior",
+    },
+    {
+      id: 13,
+      empresa: "RocketDev",
+      cargo: "Desenvolvedor Node.js Júnior",
+      requisitos: ["Node.js", "JavaScript", "Git"],
+      salario: 3900,
+      modalidade: "Remoto",
+      nivel: "Júnior",
+    },
+    {
+      id: 14,
+      empresa: "SoftVision",
+      cargo: "Assistente Front-End",
+      requisitos: ["JavaScript", "GitHub", "Kanban"],
+      salario: 2400,
+      modalidade: "Presencial",
+      nivel: "Assistente",
+    },
+    {
+      id: 15,
+      empresa: "FutureTech",
+      cargo: "Desenvolvedor Front-End Pleno",
+      requisitos: ["React", "TypeScript", "APIs", "GitHub"],
+      salario: 5500,
+      modalidade: "Híbrido",
+      nivel: "Pleno",
+    },
   ];
 
   return new Promise((resolve) => {
@@ -543,6 +648,7 @@ function processarVagas(vagas, callback) {
 // Mostra a quantidade de vagas cadastradas
 function mostrarQuantidadeVagas(vagas) {
   alert("Foram encontradas " + vagas.length + " vagas.");
+  alert("Foram feitas ("+contarBuscas()+") buscas até o momento.")
 }
 
 // Busca as vagas cadastradas
@@ -622,3 +728,5 @@ async function introducao() {
 
 // Inicia o sistema
 introducao();
+
+console.log(typeof introducao);
