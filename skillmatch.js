@@ -728,5 +728,3 @@ async function introducao() {
 
 // Inicia o sistema
 introducao();
-
-console.log(typeof introducao);
