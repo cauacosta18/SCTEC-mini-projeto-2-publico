@@ -180,7 +180,7 @@ function criarContadorBuscas() {
 }
 
 // Instancia o contador de buscas
-const contarBuscas = criarContadorBuscas();
+export const contarBuscas = criarContadorBuscas();
 
 // ---------------------------------------------------------------------------
 
@@ -434,9 +434,7 @@ function buscarCandidatosSimulados() {
 
 // Busca os candidatos cadastrados
 async function buscarCandidatos() {
-  alert("Buscando candidatos...");
   const candidatosCarregados = await buscarCandidatosSimulados();
-  alert("Candidatos encontrados.");
   return candidatosCarregados;
 }
 
@@ -463,9 +461,7 @@ async function verificarEmailSenha(input) {
 }
 
 // Recebe o email e senha do candidato
-async function realizarLogin() {
-  let email = prompt("Digite o seu email");
-  let senha = prompt("Digite a sua senha");
+export async function realizarLogin(email, senha) {
 
   let resposta = await verificarEmailSenha({ email: email, senha: senha });
 
@@ -477,6 +473,13 @@ async function realizarLogin() {
 // ==========================
 // Processo de Busca de Vagas
 // ==========================
+
+class InfoVagasEncontradas {
+  constructor (numVagas, numBuscas) {
+    this.numBuscas = numBuscas;
+    this.numVagas = numVagas;
+  }
+}
 
 // Armazena as vagas e as retorna em forma de classe
 function buscarVagasSimuladas() {
@@ -640,91 +643,29 @@ function buscarVagasSimuladas() {
 
 // Mostra uma mensagem no fim do processamento das vagas
 function processarVagas(vagas, callback) {
-  alert("Vagas processadas com sucesso!");
-
-  callback(vagas);
+  let respostaProcessamento = callback(vagas);
+  return respostaProcessamento;
 }
 
 // Mostra a quantidade de vagas cadastradas
-function mostrarQuantidadeVagas(vagas) {
-  alert("Foram encontradas " + vagas.length + " vagas.");
-  alert("Foram feitas ("+contarBuscas()+") buscas até o momento.")
+function processarInfoVagas(vagas) {
+  let infoVagasEncontradas = new InfoVagasEncontradas(vagas.length, contarBuscas());
+  return infoVagasEncontradas;
 }
 
 // Busca as vagas cadastradas
-async function buscarVagas() {
-  alert("Buscando vagas...");
+export async function buscarVagas() {
   const vagasCarregadas = await buscarVagasSimuladas();
 
-  processarVagas(vagasCarregadas, mostrarQuantidadeVagas);
+  let respostaBusca = {
+    vagasCarregadas: vagasCarregadas,
+    infoVagasEncontradas: null
+  }
 
-  return vagasCarregadas;
+  respostaBusca.infoVagasEncontradas = processarVagas(vagasCarregadas, processarInfoVagas);
+
+  return respostaBusca;
 }
 
 // ---------------------------------------------------------------------------
 
-// ==========================
-// Tela de início
-// ==========================
-
-// Permite o candidato acessar o sistema
-async function introducao() {
-  let loginRealizado = false;
-
-  let input = "";
-
-  let candidatoAtual;
-
-  do {
-    input = prompt(
-      "Bem-vindo ao SkillMatch JS\n\n" +
-        "O que deseja fazer?\n" +
-        "1 - mostrar todas vagas disponíveis\n" +
-        "2 - mostrar perfil do usuário\n" +
-        "3 - fazer o login\n" +
-        "x - sair",
-    );
-
-    input = input.toLowerCase();
-
-    switch (input) {
-      case "1":
-        if (loginRealizado === false) {
-          alert("Faça o login para acessar");
-          break;
-        }
-        let vagas = await buscarVagas();
-
-        mostrarVagas(candidatoAtual, vagas);
-        break;
-
-      case "2":
-        if (loginRealizado === false) {
-          alert("Faça o login para acessar");
-          break;
-        }
-        alert(candidatoAtual.exibirResumo());
-        break;
-
-      case "3":
-        let resposta = await realizarLogin();
-        if (resposta.loginRealizado) {
-          candidatoAtual = resposta.candidato;
-          loginRealizado = true;
-          alert("Login realizado com sucesso");
-        } else {
-          alert("Login não realizado");
-        }
-        break;
-
-      default:
-        if (input !== "x") {
-          alert("Opção inválida.");
-        }
-        break;
-    }
-  } while (input !== "x");
-}
-
-// Inicia o sistema
-introducao();
