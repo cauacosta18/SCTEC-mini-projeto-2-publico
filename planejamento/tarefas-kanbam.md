@@ -2,6 +2,13 @@
 
 ## Backlog
 
+- Adaptar arquivo Skillmatch.js para implementação das páginas html
+- Criar tela de login
+- Criar tela de perfil do usuário
+- Criar tela de vagas encontradas
+- Implementar funcionalidade de análise de compatibilidade
+- Criar fluxo de cadastro
+
 ---
 
 ## A Fazer
