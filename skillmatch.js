@@ -18,12 +18,12 @@ class Vaga {
   }
 
   // Classifica a compatibilidade
-  mostrarCompatibilidade(compatibilidadeInfo) {
+  mostrarCompatibilidade(compatibilidade) {
     let classificacao;
 
-    if (compatibilidadeInfo.compatibilidade >= 80) {
+    if (compatibilidade >= 80) {
       classificacao = "Alta compatibilidade";
-    } else if (compatibilidadeInfo.compatibilidade >= 50) {
+    } else if (compatibilidade >= 50) {
       classificacao = "Média compatibilidade";
     } else {
       classificacao = "Baixa compatibilidade";
@@ -103,6 +103,7 @@ class Vaga {
       Number(compatibilidade.toFixed(2)),
       requisitosAtendidos,
       requisitosNaoAtendidos,
+      this.mostrarCompatibilidade(compatibilidade)
     );
   }
 }
@@ -128,11 +129,13 @@ class CompatibilidadeInfo {
     compatibilidade,
     requisitosAtendidos,
     requisitosNaoAtendidos,
+    classificacao
   ) {
     this.idVaga = idVaga;
     this.compatibilidade = compatibilidade;
     this.requisitosAtendidos = requisitosAtendidos;
     this.requisitosNaoAtendidos = requisitosNaoAtendidos;
+    this.classificacao = classificacao;
   }
 }
 class Candidato {
@@ -189,22 +192,20 @@ export const contarBuscas = criarContadorBuscas();
 // ==========================
 
 // Mostra o resumo de cada vaga
-function verVagas(candidato, vagas) {
+export function buscarSugestoesVagas(candidato, vagas) {
   let abasVagas = [];
 
   let recomendacaoDeEstudo = [];
 
   let vagaComMaiorCompatibilidade = {
-    id: null,
     compatibilidade: null,
+    vaga: null
   };
 
   let compatibilidades = [];
-  let indice = 0;
 
   for (const vaga of vagas) {
 
-    abasVagas[indice] = "";
 
     let compatibilidadeInfo = vaga.calcularCompatibilidade(candidato);
     let requisitosNaoAtendidos = compatibilidadeInfo.requisitosNaoAtendidos;
@@ -215,82 +216,24 @@ function verVagas(candidato, vagas) {
       recomendacaoDeEstudo.push(requisito);
     }
 
-    abasVagas[indice] += vaga.exibirResumo();
-
-    if (requisitosNaoAtendidos.length === 0) {
-      abasVagas[indice] +=
-        "\n\nPara a vaga da " + vaga.empresa + ", não falta nenhum requisito";
-    } else {
-      abasVagas[indice] +=
-        "\n\nPara a vaga da " +
-        vaga.empresa +
-        ", faltam:\n" +
-        "- " +
-        requisitosNaoAtendidos.join("\n- ");
-    }
-
     if (
       vagaComMaiorCompatibilidade.compatibilidade === null ||
       vagaComMaiorCompatibilidade.compatibilidade < compatibilidade
     ) {
-      vagaComMaiorCompatibilidade.id = vaga.id;
       vagaComMaiorCompatibilidade.compatibilidade = compatibilidade;
+      vagaComMaiorCompatibilidade.vaga = vaga;
     }
 
     compatibilidades.push(compatibilidadeInfo);
 
-    indice++;
   }
 
-  let vagaEncontrada = vagas.find(
-    (vaga) => vaga.id === vagaComMaiorCompatibilidade.id,
-  );
-
-  let mensagem =
-    "Primeira vaga mais compatível:\n" +
-    vagaEncontrada.empresa +
-    " - " +
-    vagaEncontrada.cargo +
-    "\nCompatibilidade: " +
-    vagaComMaiorCompatibilidade.compatibilidade +
-    "%";
-
-  if (recomendacaoDeEstudo.length !== 0) {
-    mensagem +=
-      "\n\nRecomendações de estudo:\n" +
-      "Priorize estudar " +
-      recomendacaoDeEstudo.join(", ") +
-      ", pois esses conteúdos aparecem nas vagas analisadas.";
+  let sugestoes = {
+    recomendacaoDeEstudo: recomendacaoDeEstudo,
+    vagaComMaiorCompatibilidade: vagaComMaiorCompatibilidade
   }
 
-  let input;
-
-  let pergunta = "\n\nQual aba deseja abrir? ";
-
-  for (let i = 0; i < abasVagas.length; i++) {
-    pergunta += i + 1 + " / ";
-  }
-
-  pergunta += "x - sair";
-
-  do {
-    input = prompt(mensagem + pergunta);
-
-    input = input.toLowerCase();
-
-    if (isNaN(Number(input)) && input !== "x") {
-      alert("Digite uma opção válida");
-      continue;
-    }
-
-    if (input === "x") {
-      continue;
-    }
-
-    alert(abasVagas[Number(input) - 1]);
-  } while (input !== "x");
-
-  return compatibilidades;
+  return sugestoes;
 }
 
 // Permite o candidato ver mais informações sobre uma vaga
@@ -659,10 +602,31 @@ export async function buscarVagas() {
 
   let respostaBusca = {
     vagasCarregadas: vagasCarregadas,
-    infoVagasEncontradas: null
+    infoVagasEncontradas: null,
   }
 
   respostaBusca.infoVagasEncontradas = processarVagas(vagasCarregadas, processarInfoVagas);
+
+  return respostaBusca;
+}
+
+// Busca as vagas cadastradas
+export function buscarSugestoes(candidato, vagas) {
+
+  let respostaBusca = {
+    compatibilidadesInfoPorVaga: [],
+    recomendacaoDeEstudo: null,
+    vagaComMaiorCompatibilidade: null,
+  }
+
+  for (const vaga of vagas) {
+    respostaBusca.compatibilidadesInfoPorVaga.push(vaga.calcularCompatibilidade(candidato));
+  }
+
+  let respostaSugestao = buscarSugestoesVagas(candidato, vagas);
+
+  respostaBusca.vagaComMaiorCompatibilidade = respostaSugestao.vagaComMaiorCompatibilidade;
+  respostaBusca.recomendacaoDeEstudo = respostaSugestao.recomendacaoDeEstudo;
 
   return respostaBusca;
 }
