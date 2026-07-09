@@ -107,7 +107,7 @@ class Vaga {
     );
   }
 }
-class VagaFrontEnd extends Vaga {
+export class VagaFrontEnd extends Vaga {
   constructor(id, empresa, cargo, requisitos, salario, modalidade, nivel) {
     super(id, empresa, cargo, requisitos, salario, modalidade);
     this.nivel = nivel;
@@ -123,7 +123,7 @@ class VagaFrontEnd extends Vaga {
     return super.exibirResumo() + "\nNível da vaga: "+this.nivel;
   }
 }
-class CompatibilidadeInfo {
+export class CompatibilidadeInfo {
   constructor(
     idVaga,
     compatibilidade,
@@ -138,7 +138,7 @@ class CompatibilidadeInfo {
     this.classificacao = classificacao;
   }
 }
-class Candidato {
+export class Candidato {
   constructor(nome, area, email, senha, habilidades, experienciaMeses) {
     this.nome = nome;
     this.area = area;
@@ -199,7 +199,8 @@ export function buscarSugestoesVagas(candidato, vagas) {
 
   let vagaComMaiorCompatibilidade = {
     compatibilidade: null,
-    vaga: null
+    vaga: null,
+    requisitosNaoAtendidos: []
   };
 
   let compatibilidades = [];
@@ -222,6 +223,7 @@ export function buscarSugestoesVagas(candidato, vagas) {
     ) {
       vagaComMaiorCompatibilidade.compatibilidade = compatibilidade;
       vagaComMaiorCompatibilidade.vaga = vaga;
+      vagaComMaiorCompatibilidade.requisitosNaoAtendidos = requisitosNaoAtendidos;
     }
 
     compatibilidades.push(compatibilidadeInfo);
@@ -617,6 +619,7 @@ export function buscarSugestoes(candidato, vagas) {
     compatibilidadesInfoPorVaga: [],
     recomendacaoDeEstudo: null,
     vagaComMaiorCompatibilidade: null,
+    requisitosNaoAtendidos: []
   }
 
   for (const vaga of vagas) {
@@ -627,9 +630,15 @@ export function buscarSugestoes(candidato, vagas) {
 
   respostaBusca.vagaComMaiorCompatibilidade = respostaSugestao.vagaComMaiorCompatibilidade;
   respostaBusca.recomendacaoDeEstudo = respostaSugestao.recomendacaoDeEstudo;
+  respostaBusca.requisitosNaoAtendidos = respostaSugestao.vagaComMaiorCompatibilidade.requisitosNaoAtendidos;
 
   return respostaBusca;
 }
 
 // ---------------------------------------------------------------------------
 
+export function transformarLocalstorage(json, objeto) {
+    for (const [atributo, valor] of Object.entries(objeto)) {
+        objeto[atributo] = json[atributo];
+    }
+}
