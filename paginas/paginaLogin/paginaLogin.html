@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillMatch JS</title>
     <link rel="stylesheet" href="paginaLogin.css">
+    <link rel="stylesheet" href="./../../estilo/style.css">
+
 </head>
 <body>
     <header>
@@ -15,22 +17,27 @@
         </nav>
     </header>
     <main>
-        <section>
-            <p>Bem Vindo ao <span>SkillMatch JS</span></p>
-            <div>
+        <form action="#" class="card" id="form">
+            <div id="titulo-form">
+                <p>Bem-vindo ao</p>
+                <h2>SkillMatch JS</h2>
+            </div>
+            <div class="campo-form">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email">
             </div>
-            <div>
+            <div class="campo-form">
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" id="senha">
             </div>
-            <button id="btn-login">Fazer Login</button>
-        </section>
+            <button type="submit" class="btn-destaque" id="btn-login">Fazer Login</button>
+        </form>
     </main>
     <footer>
-
+        <p>Desenvolvido por</p>
+        <a href="https://cauacosta18.github.io/Portfolio/" target="_blank">Cauã Luiz Costa</a>
     </footer>
+    <div id="alerta">Mensagem</div>
     <script type="module" src="paginaLogin.js"></script>
 </body>
 </html>

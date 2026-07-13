@@ -214,6 +214,9 @@ export function buscarSugestoesVagas(candidato, vagas) {
     let compatibilidade = compatibilidadeInfo.compatibilidade;
 
     for (const requisito of requisitosNaoAtendidos) {
+      if (recomendacaoDeEstudo.some(recomendacao => recomendacao === requisito)) {
+        continue;
+      }
       recomendacaoDeEstudo.push(requisito);
     }
 
@@ -290,73 +293,10 @@ function mostrarVagas(candidato, vagas = []) {
 // ==========================
 
 // Armazena os candidatos e os retorna em forma de classe
-function buscarCandidatosSimulados() {
-  const candidatos = [
-    {
-      nome: "Ana",
-      area: "Front-End",
-      email: "ana@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "GitHub", "Lógica de Programação", "Kanban"],
-      experienciaMeses: 3,
-    },
-    {
-      nome: "Carlos",
-      area: "Front-End",
-      email: "carlos@email.com",
-      senha: "123",
-      habilidades: ["HTML", "CSS", "JavaScript", "React"],
-      experienciaMeses: 8,
-    },
-    {
-      nome: "Marina",
-      area: "Front-End",
-      email: "marina@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "GitHub", "Figma"],
-      experienciaMeses: 5,
-    },
-    {
-      nome: "Lucas",
-      area: "Front-End",
-      email: "lucas@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "TypeScript", "React", "GitHub"],
-      experienciaMeses: 12,
-    },
-    {
-      nome: "Fernanda",
-      area: "Front-End",
-      email: "fernanda@email.com",
-      senha: "123",
-      habilidades: ["HTML", "CSS", "Bootstrap", "Kanban"],
-      experienciaMeses: 2,
-    },
-    {
-      nome: "Rafael",
-      area: "Front-End",
-      email: "rafael@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "Vue.js", "Git", "Lógica de Programação"],
-      experienciaMeses: 10,
-    },
-    {
-      nome: "Juliana",
-      area: "Front-End",
-      email: "juliana@email.com",
-      senha: "123",
-      habilidades: ["React", "GitHub", "Kanban", "APIs"],
-      experienciaMeses: 6,
-    },
-    {
-      nome: "Pedro",
-      area: "Front-End",
-      email: "pedro@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "Node.js", "Git", "SCRUM"],
-      experienciaMeses: 9,
-    },
-  ];
+async function buscarCandidatosSimulados() {
+
+  let resposta = await fetch("./../../dados/candidatos.json");
+  let candidatos = await resposta.json();
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -427,145 +367,11 @@ class InfoVagasEncontradas {
 }
 
 // Armazena as vagas e as retorna em forma de classe
-function buscarVagasSimuladas() {
-  const vagas = [
-    {
-      id: 1,
-      empresa: "TechStart",
-      cargo: "Desenvolvedor Front-End Júnior",
-      requisitos: ["JavaScript", "GitHub", "Lógica de Programação"],
-      salario: 2800,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 2,
-      empresa: "CodeLab",
-      cargo: "Estágio Front-End",
-      requisitos: ["JavaScript", "Kanban", "GitHub"],
-      salario: 1800,
-      modalidade: "Híbrido",
-      nivel: "Estágio",
-    },
-    {
-      id: 3,
-      empresa: "WebSolutions",
-      cargo: "Programador JavaScript Júnior",
-      requisitos: ["JavaScript", "Arrays", "Objetos", "Funções"],
-      salario: 3000,
-      modalidade: "Presencial",
-      nivel: "Júnior",
-    },
-    {
-      id: 4,
-      empresa: "PixelForge",
-      cargo: "Desenvolvedor React Júnior",
-      requisitos: ["React", "JavaScript", "GitHub"],
-      salario: 3500,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 5,
-      empresa: "NextWave",
-      cargo: "Front-End Trainee",
-      requisitos: ["HTML", "CSS", "JavaScript"],
-      salario: 2200,
-      modalidade: "Híbrido",
-      nivel: "Trainee",
-    },
-    {
-      id: 6,
-      empresa: "VisionTech",
-      cargo: "Desenvolvedor Vue.js",
-      requisitos: ["Vue.js", "JavaScript", "Git"],
-      salario: 4000,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 7,
-      empresa: "DevConnect",
-      cargo: "Estágio em Desenvolvimento Web",
-      requisitos: ["HTML", "CSS", "Kanban"],
-      salario: 1600,
-      modalidade: "Presencial",
-      nivel: "Estágio",
-    },
-    {
-      id: 8,
-      empresa: "SkySystems",
-      cargo: "Desenvolvedor Front-End React",
-      requisitos: ["React", "APIs", "GitHub"],
-      salario: 4200,
-      modalidade: "Híbrido",
-      nivel: "Pleno",
-    },
-    {
-      id: 9,
-      empresa: "ByteLabs",
-      cargo: "Programador TypeScript",
-      requisitos: ["TypeScript", "React", "GitHub"],
-      salario: 4500,
-      modalidade: "Remoto",
-      nivel: "Pleno",
-    },
-    {
-      id: 10,
-      empresa: "InovaWeb",
-      cargo: "Desenvolvedor Web Júnior",
-      requisitos: ["JavaScript", "SCRUM", "Git"],
-      salario: 3200,
-      modalidade: "Presencial",
-      nivel: "Júnior",
-    },
-    {
-      id: 11,
-      empresa: "AlphaCode",
-      cargo: "Front-End com Bootstrap",
-      requisitos: ["HTML", "CSS", "Bootstrap"],
-      salario: 2600,
-      modalidade: "Híbrido",
-      nivel: "Júnior",
-    },
-    {
-      id: 12,
-      empresa: "CreativeApps",
-      cargo: "UI Front-End Developer",
-      requisitos: ["Figma", "CSS", "JavaScript"],
-      salario: 3400,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 13,
-      empresa: "RocketDev",
-      cargo: "Desenvolvedor Node.js Júnior",
-      requisitos: ["Node.js", "JavaScript", "Git"],
-      salario: 3900,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 14,
-      empresa: "SoftVision",
-      cargo: "Assistente Front-End",
-      requisitos: ["JavaScript", "GitHub", "Kanban"],
-      salario: 2400,
-      modalidade: "Presencial",
-      nivel: "Assistente",
-    },
-    {
-      id: 15,
-      empresa: "FutureTech",
-      cargo: "Desenvolvedor Front-End Pleno",
-      requisitos: ["React", "TypeScript", "APIs", "GitHub"],
-      salario: 5500,
-      modalidade: "Híbrido",
-      nivel: "Pleno",
-    },
-  ];
+async function buscarVagasSimuladas() {
 
+  let resposta = await fetch("./../../dados/vagas.json");
+  let vagas = await resposta.json();
+  
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(
@@ -641,4 +447,36 @@ export function transformarLocalstorage(json, objeto) {
     for (const [atributo, valor] of Object.entries(objeto)) {
         objeto[atributo] = json[atributo];
     }
+}
+
+export function ativarAlerta(alerta, mensagem) {
+  alerta.style.bottom = "20px";
+  alerta.textContent = mensagem;
+  
+  let timeout = setTimeout(()=> {
+    alerta.style.bottom = "-100px";
+  }, 2000);
+  alerta.addEventListener("mouseenter", () => {
+    clearTimeout(timeout);
+  });
+  alerta.addEventListener("mouseleave", ()=>{
+    timeout = setTimeout(()=> {
+    alerta.style.bottom = "-100px";
+  }, 2000);
+  });
+}
+
+export function animarCirculoCarregamento(circulo) {
+  
+  let interval = setInterval(()=>{
+    if (circulo.style.width === "35px") {
+      circulo.style.height = "75px";
+      circulo.style.width = "75px";
+    } else {
+      circulo.style.height = "35px";
+      circulo.style.width = "35px";
+    }
+  }, 1000)
+
+  return interval;
 }

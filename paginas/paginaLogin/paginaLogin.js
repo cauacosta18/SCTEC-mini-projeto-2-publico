@@ -1,10 +1,13 @@
 import { realizarLogin } from "./../../skillmatch.js";
+import { ativarAlerta } from "./../../skillmatch.js";
 
 let senhaInput = document.getElementById("senha");
 let emailInput = document.getElementById("email");
 let btnLogin = document.getElementById("btn-login");
 
 let navHeader = document.getElementById("nav-header");
+
+let form = document.getElementById("form");
 
 let link = document.createElement("a");
 if (localStorage.getItem("usuarioAtual")) {
@@ -16,9 +19,12 @@ if (localStorage.getItem("usuarioAtual")) {
 }
 navHeader.appendChild(link);
 
-btnLogin.addEventListener("click", async()=>{
+form.addEventListener("submit", async(event)=>{
+    
+    event.preventDefault();
+
     if (senhaInput.value === "" || emailInput.value === "") {
-        console.log("erro");
+        ativarAlerta(alerta, "Preencha os campos do formulário.");
         return;
     }
 
@@ -29,7 +35,10 @@ btnLogin.addEventListener("click", async()=>{
         localStorage.setItem("usuarioAtual", string);
         window.location.href = "./../paginaPerfil/paginaPerfil.html";
     } else {
-        
+        ativarAlerta(alerta, "Login não concluído.");
     }
 
 })
+
+let alerta = document.getElementById("alerta");
+
