@@ -15,7 +15,8 @@ async function inicializar() {
     // let resposta3 = resposta.vagasCarregadas[4].calcularCompatibilidade(resposta2.candidato);
     // console.log(resposta3);
     
-    contarBuscas();
+    console.log(contarBuscas());
+    
 
     // let resposta4 = buscarSugestoesVagas(resposta2.candidato, resposta.vagasCarregadas);
     // console.log(resposta4);

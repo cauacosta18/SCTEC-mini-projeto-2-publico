@@ -192,8 +192,10 @@ export const contarBuscas = criarContadorBuscas();
 // ==========================
 
 // Mostra o resumo de cada vaga
-export function buscarSugestoesVagas(candidato, vagas) {
+export function buscarSugestoesVagas(candidato, vagas, vagasTotais) {
   let abasVagas = [];
+
+  let tecnologias = [];
 
   let recomendacaoDeEstudo = [];
 
@@ -205,6 +207,8 @@ export function buscarSugestoesVagas(candidato, vagas) {
 
   let compatibilidades = [];
 
+  let requisitosNaoAtendidos;
+
   for (const vaga of vagas) {
 
 
@@ -212,13 +216,6 @@ export function buscarSugestoesVagas(candidato, vagas) {
     let requisitosNaoAtendidos = compatibilidadeInfo.requisitosNaoAtendidos;
     let requisitosAtendidos = compatibilidadeInfo.requisitosAtendidos;
     let compatibilidade = compatibilidadeInfo.compatibilidade;
-
-    for (const requisito of requisitosNaoAtendidos) {
-      if (recomendacaoDeEstudo.some(recomendacao => recomendacao === requisito)) {
-        continue;
-      }
-      recomendacaoDeEstudo.push(requisito);
-    }
 
     if (
       vagaComMaiorCompatibilidade.compatibilidade === null ||
@@ -233,9 +230,32 @@ export function buscarSugestoesVagas(candidato, vagas) {
 
   }
 
+  for (const vaga of vagasTotais) {
+
+    for (const requisito of vaga.requisitos) {
+      
+      if (!tecnologias.some(tecnologia => tecnologia === requisito)) {
+        
+        tecnologias.push(requisito);
+      }
+    }
+
+
+    let compatibilidadeInfo = vaga.calcularCompatibilidade(candidato);
+    let requisitosNaoAtendidos = compatibilidadeInfo.requisitosNaoAtendidos;
+
+    for (const requisito of requisitosNaoAtendidos) {
+      if (recomendacaoDeEstudo.some(recomendacao => recomendacao === requisito)) {
+        continue;
+      }
+      recomendacaoDeEstudo.push(requisito);
+    }
+  }
+
   let sugestoes = {
     recomendacaoDeEstudo: recomendacaoDeEstudo,
-    vagaComMaiorCompatibilidade: vagaComMaiorCompatibilidade
+    vagaComMaiorCompatibilidade: vagaComMaiorCompatibilidade,
+    tecnologias: tecnologias,
   }
 
   return sugestoes;
@@ -296,6 +316,11 @@ function mostrarVagas(candidato, vagas = []) {
 async function buscarCandidatosSimulados() {
 
   let resposta = await fetch("./../../dados/candidatos.json");
+
+  if (!resposta.ok) {
+      throw new Error(`Erro HTTP: ${resposta.status}`);
+  }
+  
   let candidatos = await resposta.json();
 
   return new Promise((resolve) => {
@@ -370,6 +395,11 @@ class InfoVagasEncontradas {
 async function buscarVagasSimuladas() {
 
   let resposta = await fetch("./../../dados/vagas.json");
+
+  if (!resposta.ok) {
+      throw new Error(`Erro HTTP: ${resposta.status}`);
+  }
+
   let vagas = await resposta.json();
   
   return new Promise((resolve) => {
@@ -400,7 +430,7 @@ function processarVagas(vagas, callback) {
 
 // Mostra a quantidade de vagas cadastradas
 function processarInfoVagas(vagas) {
-  let infoVagasEncontradas = new InfoVagasEncontradas(vagas.length, contarBuscas());
+  let infoVagasEncontradas = new InfoVagasEncontradas(vagas.length, 1);
   return infoVagasEncontradas;
 }
 
@@ -419,24 +449,26 @@ export async function buscarVagas() {
 }
 
 // Busca as vagas cadastradas
-export function buscarSugestoes(candidato, vagas) {
+export function buscarSugestoes(candidato, vagas, vagasTotais) {
 
   let respostaBusca = {
     compatibilidadesInfoPorVaga: [],
     recomendacaoDeEstudo: null,
     vagaComMaiorCompatibilidade: null,
-    requisitosNaoAtendidos: []
+    requisitosNaoAtendidos: [],
+    tecnologias: [],
   }
 
   for (const vaga of vagas) {
     respostaBusca.compatibilidadesInfoPorVaga.push(vaga.calcularCompatibilidade(candidato));
   }
 
-  let respostaSugestao = buscarSugestoesVagas(candidato, vagas);
+  let respostaSugestao = buscarSugestoesVagas(candidato, vagas, vagasTotais);
 
   respostaBusca.vagaComMaiorCompatibilidade = respostaSugestao.vagaComMaiorCompatibilidade;
   respostaBusca.recomendacaoDeEstudo = respostaSugestao.recomendacaoDeEstudo;
   respostaBusca.requisitosNaoAtendidos = respostaSugestao.vagaComMaiorCompatibilidade.requisitosNaoAtendidos;
+  respostaBusca.tecnologias = respostaSugestao.tecnologias;
 
   return respostaBusca;
 }
@@ -444,6 +476,8 @@ export function buscarSugestoes(candidato, vagas) {
 // ---------------------------------------------------------------------------
 
 export function transformarLocalstorage(json, objeto) {
+  
+  
     for (const [atributo, valor] of Object.entries(objeto)) {
         objeto[atributo] = json[atributo];
     }
@@ -462,7 +496,7 @@ export function ativarAlerta(alerta, mensagem) {
   alerta.addEventListener("mouseleave", ()=>{
     timeout = setTimeout(()=> {
     alerta.style.bottom = "-100px";
-  }, 2000);
+  }, 5000);
   });
 }
 
@@ -479,4 +513,32 @@ export function animarCirculoCarregamento(circulo) {
   }, 1000)
 
   return interval;
+}
+
+export function acionarModoExibicao(document, modo) {
+  
+  switch (modo) {
+    case "claro":
+      document.documentElement.style.setProperty("--fundo-secundario", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-fonte", "#191A1B");
+      document.documentElement.style.setProperty("--cor-destaque", "#7584af");
+      document.documentElement.style.setProperty("--fundo-principal", "#5a6166");
+      break;
+      
+    case "escuro":
+      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
+      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      break;
+        
+    default:
+      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
+      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      break;
+  }
+
+  
 }

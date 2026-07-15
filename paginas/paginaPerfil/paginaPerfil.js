@@ -1,11 +1,12 @@
 import { Candidato } from "./../../skillmatch.js";
-import { transformarLocalstorage } from "./../../skillmatch.js";
+import { transformarLocalstorage, acionarModoExibicao } from "./../../skillmatch.js";
 
 if (!localStorage.getItem("usuarioAtual")) {
     window.location.href = "./../paginaLogin/paginaLogin.html";
 }
 
 let json = JSON.parse(localStorage.getItem("usuarioAtual"));
+
 let usuarioAtual = new Candidato();
 
 transformarLocalstorage(json, usuarioAtual);
@@ -33,3 +34,24 @@ btnSair.addEventListener("click", ()=> {
     localStorage.clear();
     window.location.href = "./../paginaLogin/paginaLogin.html";
 })
+
+let modoAtual = "escuro";
+
+let btnTrocarModo = document.getElementById("btn-trocar-modo");
+
+btnTrocarModo.addEventListener("click", ()=>{
+    modoAtual = modoAtual === "escuro" ? "claro" : "escuro";
+    btnTrocarModo.textContent = `modo ${modoAtual}`;
+    localStorage.setItem("modo", modoAtual);
+    acionarModoExibicao(document, modoAtual);
+})
+
+if (localStorage.getItem("modo")) {
+    modoAtual = localStorage.getItem("modo");
+} else {
+    localStorage.setItem("modo", modoAtual);
+}
+
+btnTrocarModo.textContent = `modo ${modoAtual}`;
+
+acionarModoExibicao(document, modoAtual);
