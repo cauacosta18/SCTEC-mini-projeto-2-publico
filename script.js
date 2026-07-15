@@ -9,13 +9,14 @@ async function inicializar() {
     let resposta2 = await realizarLogin("ana@email.com", "123");
     console.log(resposta2);
     
-    let resposta = await buscarVagas(resposta2.candidato);
+    let resposta = await buscarVagas();
     console.log(resposta);
 
     // let resposta3 = resposta.vagasCarregadas[4].calcularCompatibilidade(resposta2.candidato);
     // console.log(resposta3);
     
-    contarBuscas();
+    console.log(contarBuscas());
+    
 
     // let resposta4 = buscarSugestoesVagas(resposta2.candidato, resposta.vagasCarregadas);
     // console.log(resposta4);

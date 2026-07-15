@@ -1,0 +1,105 @@
+[
+  {
+    "nome": "Ana",
+    "area": "Front-End",
+    "email": "ana@email.com",
+    "senha": "123",
+    "habilidades": [
+      "JavaScript",
+      "GitHub",
+      "Lógica de Programação",
+      "Kanban"
+    ],
+    "experienciaMeses": 3
+  },
+  {
+    "nome": "Carlos",
+    "area": "Front-End",
+    "email": "carlos@email.com",
+    "senha": "123",
+    "habilidades": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React"
+    ],
+    "experienciaMeses": 8
+  },
+  {
+    "nome": "Marina",
+    "area": "Front-End",
+    "email": "marina@email.com",
+    "senha": "123",
+    "habilidades": [
+      "JavaScript",
+      "GitHub",
+      "Figma"
+    ],
+    "experienciaMeses": 5
+  },
+  {
+    "nome": "Lucas",
+    "area": "Front-End",
+    "email": "lucas@email.com",
+    "senha": "123",
+    "habilidades": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "GitHub"
+    ],
+    "experienciaMeses": 12
+  },
+  {
+    "nome": "Fernanda",
+    "area": "Front-End",
+    "email": "fernanda@email.com",
+    "senha": "123",
+    "habilidades": [
+      "HTML",
+      "CSS",
+      "Bootstrap",
+      "Kanban"
+    ],
+    "experienciaMeses": 2
+  },
+  {
+    "nome": "Rafael",
+    "area": "Front-End",
+    "email": "rafael@email.com",
+    "senha": "123",
+    "habilidades": [
+      "JavaScript",
+      "Vue.js",
+      "Git",
+      "Lógica de Programação"
+    ],
+    "experienciaMeses": 10
+  },
+  {
+    "nome": "Juliana",
+    "area": "Front-End",
+    "email": "juliana@email.com",
+    "senha": "123",
+    "habilidades": [
+      "React",
+      "GitHub",
+      "Kanban",
+      "APIs"
+    ],
+    "experienciaMeses": 6
+  },
+  {
+    "nome": "Pedro",
+    "area": "Front-End",
+    "email": "pedro@email.com",
+    "senha": "123",
+    "habilidades": [
+      "JavaScript",
+      "Node.js",
+      "Git",
+      "SCRUM"
+    ],
+    "experienciaMeses": 9
+  }
+]

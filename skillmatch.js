@@ -107,7 +107,7 @@ class Vaga {
     );
   }
 }
-class VagaFrontEnd extends Vaga {
+export class VagaFrontEnd extends Vaga {
   constructor(id, empresa, cargo, requisitos, salario, modalidade, nivel) {
     super(id, empresa, cargo, requisitos, salario, modalidade);
     this.nivel = nivel;
@@ -123,7 +123,7 @@ class VagaFrontEnd extends Vaga {
     return super.exibirResumo() + "\nNível da vaga: "+this.nivel;
   }
 }
-class CompatibilidadeInfo {
+export class CompatibilidadeInfo {
   constructor(
     idVaga,
     compatibilidade,
@@ -138,7 +138,7 @@ class CompatibilidadeInfo {
     this.classificacao = classificacao;
   }
 }
-class Candidato {
+export class Candidato {
   constructor(nome, area, email, senha, habilidades, experienciaMeses) {
     this.nome = nome;
     this.area = area;
@@ -192,17 +192,22 @@ export const contarBuscas = criarContadorBuscas();
 // ==========================
 
 // Mostra o resumo de cada vaga
-export function buscarSugestoesVagas(candidato, vagas) {
+export function buscarSugestoesVagas(candidato, vagas, vagasTotais) {
   let abasVagas = [];
+
+  let tecnologias = [];
 
   let recomendacaoDeEstudo = [];
 
   let vagaComMaiorCompatibilidade = {
     compatibilidade: null,
-    vaga: null
+    vaga: null,
+    requisitosNaoAtendidos: []
   };
 
   let compatibilidades = [];
+
+  let requisitosNaoAtendidos;
 
   for (const vaga of vagas) {
 
@@ -212,25 +217,45 @@ export function buscarSugestoesVagas(candidato, vagas) {
     let requisitosAtendidos = compatibilidadeInfo.requisitosAtendidos;
     let compatibilidade = compatibilidadeInfo.compatibilidade;
 
-    for (const requisito of requisitosNaoAtendidos) {
-      recomendacaoDeEstudo.push(requisito);
-    }
-
     if (
       vagaComMaiorCompatibilidade.compatibilidade === null ||
       vagaComMaiorCompatibilidade.compatibilidade < compatibilidade
     ) {
       vagaComMaiorCompatibilidade.compatibilidade = compatibilidade;
       vagaComMaiorCompatibilidade.vaga = vaga;
+      vagaComMaiorCompatibilidade.requisitosNaoAtendidos = requisitosNaoAtendidos;
     }
 
     compatibilidades.push(compatibilidadeInfo);
 
   }
 
+  for (const vaga of vagasTotais) {
+
+    for (const requisito of vaga.requisitos) {
+      
+      if (!tecnologias.some(tecnologia => tecnologia === requisito)) {
+        
+        tecnologias.push(requisito);
+      }
+    }
+
+
+    let compatibilidadeInfo = vaga.calcularCompatibilidade(candidato);
+    let requisitosNaoAtendidos = compatibilidadeInfo.requisitosNaoAtendidos;
+
+    for (const requisito of requisitosNaoAtendidos) {
+      if (recomendacaoDeEstudo.some(recomendacao => recomendacao === requisito)) {
+        continue;
+      }
+      recomendacaoDeEstudo.push(requisito);
+    }
+  }
+
   let sugestoes = {
     recomendacaoDeEstudo: recomendacaoDeEstudo,
-    vagaComMaiorCompatibilidade: vagaComMaiorCompatibilidade
+    vagaComMaiorCompatibilidade: vagaComMaiorCompatibilidade,
+    tecnologias: tecnologias,
   }
 
   return sugestoes;
@@ -288,73 +313,15 @@ function mostrarVagas(candidato, vagas = []) {
 // ==========================
 
 // Armazena os candidatos e os retorna em forma de classe
-function buscarCandidatosSimulados() {
-  const candidatos = [
-    {
-      nome: "Ana",
-      area: "Front-End",
-      email: "ana@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "GitHub", "Lógica de Programação", "Kanban"],
-      experienciaMeses: 3,
-    },
-    {
-      nome: "Carlos",
-      area: "Front-End",
-      email: "carlos@email.com",
-      senha: "123",
-      habilidades: ["HTML", "CSS", "JavaScript", "React"],
-      experienciaMeses: 8,
-    },
-    {
-      nome: "Marina",
-      area: "Front-End",
-      email: "marina@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "GitHub", "Figma"],
-      experienciaMeses: 5,
-    },
-    {
-      nome: "Lucas",
-      area: "Front-End",
-      email: "lucas@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "TypeScript", "React", "GitHub"],
-      experienciaMeses: 12,
-    },
-    {
-      nome: "Fernanda",
-      area: "Front-End",
-      email: "fernanda@email.com",
-      senha: "123",
-      habilidades: ["HTML", "CSS", "Bootstrap", "Kanban"],
-      experienciaMeses: 2,
-    },
-    {
-      nome: "Rafael",
-      area: "Front-End",
-      email: "rafael@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "Vue.js", "Git", "Lógica de Programação"],
-      experienciaMeses: 10,
-    },
-    {
-      nome: "Juliana",
-      area: "Front-End",
-      email: "juliana@email.com",
-      senha: "123",
-      habilidades: ["React", "GitHub", "Kanban", "APIs"],
-      experienciaMeses: 6,
-    },
-    {
-      nome: "Pedro",
-      area: "Front-End",
-      email: "pedro@email.com",
-      senha: "123",
-      habilidades: ["JavaScript", "Node.js", "Git", "SCRUM"],
-      experienciaMeses: 9,
-    },
-  ];
+async function buscarCandidatosSimulados() {
+
+  let resposta = await fetch("./../../dados/candidatos.json");
+
+  if (!resposta.ok) {
+      throw new Error(`Erro HTTP: ${resposta.status}`);
+  }
+  
+  let candidatos = await resposta.json();
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -425,145 +392,16 @@ class InfoVagasEncontradas {
 }
 
 // Armazena as vagas e as retorna em forma de classe
-function buscarVagasSimuladas() {
-  const vagas = [
-    {
-      id: 1,
-      empresa: "TechStart",
-      cargo: "Desenvolvedor Front-End Júnior",
-      requisitos: ["JavaScript", "GitHub", "Lógica de Programação"],
-      salario: 2800,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 2,
-      empresa: "CodeLab",
-      cargo: "Estágio Front-End",
-      requisitos: ["JavaScript", "Kanban", "GitHub"],
-      salario: 1800,
-      modalidade: "Híbrido",
-      nivel: "Estágio",
-    },
-    {
-      id: 3,
-      empresa: "WebSolutions",
-      cargo: "Programador JavaScript Júnior",
-      requisitos: ["JavaScript", "Arrays", "Objetos", "Funções"],
-      salario: 3000,
-      modalidade: "Presencial",
-      nivel: "Júnior",
-    },
-    {
-      id: 4,
-      empresa: "PixelForge",
-      cargo: "Desenvolvedor React Júnior",
-      requisitos: ["React", "JavaScript", "GitHub"],
-      salario: 3500,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 5,
-      empresa: "NextWave",
-      cargo: "Front-End Trainee",
-      requisitos: ["HTML", "CSS", "JavaScript"],
-      salario: 2200,
-      modalidade: "Híbrido",
-      nivel: "Trainee",
-    },
-    {
-      id: 6,
-      empresa: "VisionTech",
-      cargo: "Desenvolvedor Vue.js",
-      requisitos: ["Vue.js", "JavaScript", "Git"],
-      salario: 4000,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 7,
-      empresa: "DevConnect",
-      cargo: "Estágio em Desenvolvimento Web",
-      requisitos: ["HTML", "CSS", "Kanban"],
-      salario: 1600,
-      modalidade: "Presencial",
-      nivel: "Estágio",
-    },
-    {
-      id: 8,
-      empresa: "SkySystems",
-      cargo: "Desenvolvedor Front-End React",
-      requisitos: ["React", "APIs", "GitHub"],
-      salario: 4200,
-      modalidade: "Híbrido",
-      nivel: "Pleno",
-    },
-    {
-      id: 9,
-      empresa: "ByteLabs",
-      cargo: "Programador TypeScript",
-      requisitos: ["TypeScript", "React", "GitHub"],
-      salario: 4500,
-      modalidade: "Remoto",
-      nivel: "Pleno",
-    },
-    {
-      id: 10,
-      empresa: "InovaWeb",
-      cargo: "Desenvolvedor Web Júnior",
-      requisitos: ["JavaScript", "SCRUM", "Git"],
-      salario: 3200,
-      modalidade: "Presencial",
-      nivel: "Júnior",
-    },
-    {
-      id: 11,
-      empresa: "AlphaCode",
-      cargo: "Front-End com Bootstrap",
-      requisitos: ["HTML", "CSS", "Bootstrap"],
-      salario: 2600,
-      modalidade: "Híbrido",
-      nivel: "Júnior",
-    },
-    {
-      id: 12,
-      empresa: "CreativeApps",
-      cargo: "UI Front-End Developer",
-      requisitos: ["Figma", "CSS", "JavaScript"],
-      salario: 3400,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 13,
-      empresa: "RocketDev",
-      cargo: "Desenvolvedor Node.js Júnior",
-      requisitos: ["Node.js", "JavaScript", "Git"],
-      salario: 3900,
-      modalidade: "Remoto",
-      nivel: "Júnior",
-    },
-    {
-      id: 14,
-      empresa: "SoftVision",
-      cargo: "Assistente Front-End",
-      requisitos: ["JavaScript", "GitHub", "Kanban"],
-      salario: 2400,
-      modalidade: "Presencial",
-      nivel: "Assistente",
-    },
-    {
-      id: 15,
-      empresa: "FutureTech",
-      cargo: "Desenvolvedor Front-End Pleno",
-      requisitos: ["React", "TypeScript", "APIs", "GitHub"],
-      salario: 5500,
-      modalidade: "Híbrido",
-      nivel: "Pleno",
-    },
-  ];
+async function buscarVagasSimuladas() {
 
+  let resposta = await fetch("./../../dados/vagas.json");
+
+  if (!resposta.ok) {
+      throw new Error(`Erro HTTP: ${resposta.status}`);
+  }
+
+  let vagas = await resposta.json();
+  
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(
@@ -592,7 +430,7 @@ function processarVagas(vagas, callback) {
 
 // Mostra a quantidade de vagas cadastradas
 function processarInfoVagas(vagas) {
-  let infoVagasEncontradas = new InfoVagasEncontradas(vagas.length, contarBuscas());
+  let infoVagasEncontradas = new InfoVagasEncontradas(vagas.length, 1);
   return infoVagasEncontradas;
 }
 
@@ -611,25 +449,96 @@ export async function buscarVagas() {
 }
 
 // Busca as vagas cadastradas
-export function buscarSugestoes(candidato, vagas) {
+export function buscarSugestoes(candidato, vagas, vagasTotais) {
 
   let respostaBusca = {
     compatibilidadesInfoPorVaga: [],
     recomendacaoDeEstudo: null,
     vagaComMaiorCompatibilidade: null,
+    requisitosNaoAtendidos: [],
+    tecnologias: [],
   }
 
   for (const vaga of vagas) {
     respostaBusca.compatibilidadesInfoPorVaga.push(vaga.calcularCompatibilidade(candidato));
   }
 
-  let respostaSugestao = buscarSugestoesVagas(candidato, vagas);
+  let respostaSugestao = buscarSugestoesVagas(candidato, vagas, vagasTotais);
 
   respostaBusca.vagaComMaiorCompatibilidade = respostaSugestao.vagaComMaiorCompatibilidade;
   respostaBusca.recomendacaoDeEstudo = respostaSugestao.recomendacaoDeEstudo;
+  respostaBusca.requisitosNaoAtendidos = respostaSugestao.vagaComMaiorCompatibilidade.requisitosNaoAtendidos;
+  respostaBusca.tecnologias = respostaSugestao.tecnologias;
 
   return respostaBusca;
 }
 
 // ---------------------------------------------------------------------------
 
+export function transformarLocalstorage(json, objeto) {
+  
+  
+    for (const [atributo, valor] of Object.entries(objeto)) {
+        objeto[atributo] = json[atributo];
+    }
+}
+
+export function ativarAlerta(alerta, mensagem) {
+  alerta.style.bottom = "20px";
+  alerta.textContent = mensagem;
+  
+  let timeout = setTimeout(()=> {
+    alerta.style.bottom = "-100px";
+  }, 2000);
+  alerta.addEventListener("mouseenter", () => {
+    clearTimeout(timeout);
+  });
+  alerta.addEventListener("mouseleave", ()=>{
+    timeout = setTimeout(()=> {
+    alerta.style.bottom = "-100px";
+  }, 5000);
+  });
+}
+
+export function animarCirculoCarregamento(circulo) {
+  
+  let interval = setInterval(()=>{
+    if (circulo.style.width === "35px") {
+      circulo.style.height = "75px";
+      circulo.style.width = "75px";
+    } else {
+      circulo.style.height = "35px";
+      circulo.style.width = "35px";
+    }
+  }, 1000)
+
+  return interval;
+}
+
+export function acionarModoExibicao(document, modo) {
+  
+  switch (modo) {
+    case "claro":
+      document.documentElement.style.setProperty("--fundo-secundario", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-fonte", "#191A1B");
+      document.documentElement.style.setProperty("--cor-destaque", "#7584af");
+      document.documentElement.style.setProperty("--fundo-principal", "#5a6166");
+      break;
+      
+    case "escuro":
+      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
+      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      break;
+        
+    default:
+      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
+      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
+      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      break;
+  }
+
+  
+}

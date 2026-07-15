@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "empresa": "TechStart",
+    "cargo": "Desenvolvedor Front-End Júnior",
+    "requisitos": ["JavaScript", "GitHub", "Lógica de Programação"],
+    "salario": 2800,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 2,
+    "empresa": "CodeLab",
+    "cargo": "Estágio Front-End",
+    "requisitos": ["JavaScript", "Kanban", "GitHub"],
+    "salario": 1800,
+    "modalidade": "Híbrido",
+    "nivel": "Estágio"
+  },
+  {
+    "id": 3,
+    "empresa": "WebSolutions",
+    "cargo": "Programador JavaScript Júnior",
+    "requisitos": ["JavaScript", "Arrays", "Objetos", "Funções"],
+    "salario": 3000,
+    "modalidade": "Presencial",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 4,
+    "empresa": "PixelForge",
+    "cargo": "Desenvolvedor React Júnior",
+    "requisitos": ["React", "JavaScript", "GitHub"],
+    "salario": 3500,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 5,
+    "empresa": "NextWave",
+    "cargo": "Front-End Trainee",
+    "requisitos": ["HTML", "CSS", "JavaScript"],
+    "salario": 2200,
+    "modalidade": "Híbrido",
+    "nivel": "Trainee"
+  },
+  {
+    "id": 6,
+    "empresa": "VisionTech",
+    "cargo": "Desenvolvedor Vue.js",
+    "requisitos": ["Vue.js", "JavaScript", "Git"],
+    "salario": 4000,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 7,
+    "empresa": "DevConnect",
+    "cargo": "Estágio em Desenvolvimento Web",
+    "requisitos": ["HTML", "CSS", "Kanban"],
+    "salario": 1600,
+    "modalidade": "Presencial",
+    "nivel": "Estágio"
+  },
+  {
+    "id": 8,
+    "empresa": "SkySystems",
+    "cargo": "Desenvolvedor Front-End React",
+    "requisitos": ["React", "APIs", "GitHub"],
+    "salario": 4200,
+    "modalidade": "Híbrido",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 9,
+    "empresa": "ByteLabs",
+    "cargo": "Programador TypeScript",
+    "requisitos": ["TypeScript", "React", "GitHub"],
+    "salario": 4500,
+    "modalidade": "Remoto",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 10,
+    "empresa": "InovaWeb",
+    "cargo": "Desenvolvedor Web Júnior",
+    "requisitos": ["JavaScript", "SCRUM", "Git"],
+    "salario": 3200,
+    "modalidade": "Presencial",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 11,
+    "empresa": "AlphaCode",
+    "cargo": "Front-End com Bootstrap",
+    "requisitos": ["HTML", "CSS", "Bootstrap"],
+    "salario": 2600,
+    "modalidade": "Híbrido",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 12,
+    "empresa": "CreativeApps",
+    "cargo": "UI Front-End Developer",
+    "requisitos": ["Figma", "CSS", "JavaScript"],
+    "salario": 3400,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 13,
+    "empresa": "RocketDev",
+    "cargo": "Desenvolvedor Node.js Júnior",
+    "requisitos": ["Node.js", "JavaScript", "Git"],
+    "salario": 3900,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 14,
+    "empresa": "SoftVision",
+    "cargo": "Assistente Front-End",
+    "requisitos": ["JavaScript", "GitHub", "Kanban"],
+    "salario": 2400,
+    "modalidade": "Presencial",
+    "nivel": "Assistente"
+  },
+  {
+    "id": 15,
+    "empresa": "FutureTech",
+    "cargo": "Desenvolvedor Front-End Pleno",
+    "requisitos": ["React", "TypeScript", "APIs", "GitHub"],
+    "salario": 5500,
+    "modalidade": "Híbrido",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 16,
+    "empresa": "DigitalFlow",
+    "cargo": "Desenvolvedor Front-End",
+    "requisitos": ["HTML", "CSS", "JavaScript", "Git"],
+    "salario": 3300,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 17,
+    "empresa": "CodeFusion",
+    "cargo": "Estágio em React",
+    "requisitos": ["React", "JavaScript", "HTML"],
+    "salario": 1900,
+    "modalidade": "Híbrido",
+    "nivel": "Estágio"
+  },
+  {
+    "id": 18,
+    "empresa": "NovaSoft",
+    "cargo": "Desenvolvedor Full Stack Júnior",
+    "requisitos": ["JavaScript", "Node.js", "React", "Git"],
+    "salario": 4300,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 19,
+    "empresa": "CloudWare",
+    "cargo": "Desenvolvedor Web",
+    "requisitos": ["HTML", "CSS", "JavaScript", "APIs"],
+    "salario": 3100,
+    "modalidade": "Presencial",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 20,
+    "empresa": "InfinityCode",
+    "cargo": "Front-End React",
+    "requisitos": ["React", "TypeScript", "GitHub"],
+    "salario": 4700,
+    "modalidade": "Remoto",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 21,
+    "empresa": "BrightTech",
+    "cargo": "Desenvolvedor JavaScript",
+    "requisitos": ["JavaScript", "Objetos", "Funções", "Git"],
+    "salario": 3600,
+    "modalidade": "Híbrido",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 22,
+    "empresa": "PrimeSystems",
+    "cargo": "Estagiário de Desenvolvimento",
+    "requisitos": ["HTML", "CSS", "JavaScript"],
+    "salario": 1700,
+    "modalidade": "Remoto",
+    "nivel": "Estágio"
+  },
+  {
+    "id": 23,
+    "empresa": "HexaDev",
+    "cargo": "Desenvolvedor Vue.js Júnior",
+    "requisitos": ["Vue.js", "JavaScript", "GitHub"],
+    "salario": 3900,
+    "modalidade": "Híbrido",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 24,
+    "empresa": "BluePixel",
+    "cargo": "Front-End UI Developer",
+    "requisitos": ["Figma", "CSS", "HTML", "JavaScript"],
+    "salario": 3700,
+    "modalidade": "Remoto",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 25,
+    "empresa": "SmartCode",
+    "cargo": "Desenvolvedor React Native",
+    "requisitos": ["React", "JavaScript", "Git"],
+    "salario": 5200,
+    "modalidade": "Remoto",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 26,
+    "empresa": "LinkSoft",
+    "cargo": "Programador Front-End",
+    "requisitos": ["Bootstrap", "CSS", "JavaScript"],
+    "salario": 2900,
+    "modalidade": "Presencial",
+    "nivel": "Júnior"
+  },
+  {
+    "id": 27,
+    "empresa": "VisionCode",
+    "cargo": "Desenvolvedor Web Full Stack",
+    "requisitos": ["Node.js", "React", "APIs", "GitHub"],
+    "salario": 5800,
+    "modalidade": "Híbrido",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 28,
+    "empresa": "SparkTech",
+    "cargo": "Assistente de Desenvolvimento",
+    "requisitos": ["GitHub", "JavaScript", "SCRUM"],
+    "salario": 2500,
+    "modalidade": "Presencial",
+    "nivel": "Assistente"
+  },
+  {
+    "id": 29,
+    "empresa": "DevSphere",
+    "cargo": "Desenvolvedor Front-End Angular",
+    "requisitos": ["Angular", "TypeScript", "Git"],
+    "salario": 5000,
+    "modalidade": "Remoto",
+    "nivel": "Pleno"
+  },
+  {
+    "id": 30,
+    "empresa": "NextCode",
+    "cargo": "Desenvolvedor JavaScript Júnior",
+    "requisitos": ["JavaScript", "Arrays", "Objetos", "GitHub"],
+    "salario": 3400,
+    "modalidade": "Híbrido",
+    "nivel": "Júnior"
+  }
+]

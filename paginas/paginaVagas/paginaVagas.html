@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Encontre vagas de tecnologia no SkillMatch, aplique filtros e descubra sua compatibilidade com cada oportunidade.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatch JS</title>
+    <link rel="stylesheet" href="paginaVagas.css">
+    <link rel="stylesheet" href="./../../estilo/style.css">
+    <link rel="shortcut icon" href="./../../img/icones/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>SkillMatch JS</h1>
+        <nav id="nav-header">
+            <button id="btn-trocar-modo" class="btn-destaque">Modo claro</button>
+            <a href="./../paginaVagas/paginaVagas.html">vagas</a>
+            <a href="./../paginaLogin/paginaLogin.html">login</a>
+        </nav>
+    </header>
+    <div id="carregando">
+        <div id="circulo-carregando"></div>
+    </div>
+    
+    <main id="pagina-vagas">
+        <div id="principal">
+            <form action="#" class="card" id="filtro-form" style="display: none;">
+                <button aria-label="fechar-abrir-filtros" type="button" id="btn-fechar-filtros" class="btn-fechar btn-abrir"></button>
+                <h2>Filtros</h2>
+                <div id="filtros">
+                    <div>
+                        <div class="campo-filtro">
+                            <label for="modalidade-filtro">Modalidade:</label>
+                            <select name="modalidade-filtro" id="modalidade-filtro">
+                                <option value="nenhum"></option>
+                            </select>
+                        </div>
+                        <div class="campo-filtro">
+                            <label for="nivel-filtro">Nível:</label>
+                            <select name="nivel-filtro" id="nivel-filtro">
+                                <option value="nenhum"></option>
+                            </select>
+                        </div>
+                        <div class="campo-filtro">
+                            <label for="faixa-filtro">Faixa salárial:</label>
+                            <select name="faixa-filtro" id="faixa-filtro">
+                                <option value="nenhum"></option>
+                                <option value="[0, 2000]">Até R$ 2.000</option>
+                                <option value="[2001, 3000]">R$ 2.001–3.000</option>
+                                <option value="[3001, 4000]">R$ 3.001–4.000</option>
+                                <option value="[4001, 5000]">R$ 4.001–5.000</option>
+                                <option value="[5001, 0]">Acima de R$ 5.000</option>
+                            </select>
+                        </div>
+                    
+                        <div class="campo-filtro">
+                            <label for="cargo-filtro">Cargo:</label>
+                            <input type="text" name="cargo-filtro" id="cargo-filtro">
+                        </div>
+                        <div class="campo-filtro">
+                            <label for="empresa-filtro">Empresa:</label>
+                            <input type="text" name="empresa-filtro" id="empresa-filtro">
+                        </div>
+                    </div>
+                    <p>Tecnologias</p>
+                    <div class="campo-filtro" id="tecnologias-filtro">
+                    
+                    </div>
+                    <hr>
+                    
+                    <div id="btns-filtros">
+                        <button type="submit" id="btn-aplicar-filtros" class="btn-destaque">Aplicar</button>
+                        <button type="reset" id="btn-resetar-filtros" class="btn-destaque">Resetar</button>
+                    </div>
+                </div>
+            </form>
+            <section id="sugestoes" style="display: none;">
+                <div class="card" id="vaga-destaque">
+                    <h2 id="teste">Primeira vaga mais compatível</h2>
+                    <div>
+                        <div>
+                            <p id="nome-empresa-vaga-destaque" class="descricao">Nome da empresa</p>
+                            <p id="cargo-vaga-destaque">Nome do cargo</p>
+                            <p class="descricao">Requisitos:</p>
+                            <section id="requisitos-vaga-destaque" class="conjunto conjunto-ativado">
+                                
+                            </section>
+                        </div>
+                        <div>
+                            <div class="container-duplo">
+                                <div>
+                                    <p>Modalidade:</p>
+                                    <p id="modalidade-vaga-destaque">Modalidade</p>
+                                </div>
+                                <div>
+                                    <p>Nível da vaga:</p>
+                                    <p id="nivel-vaga-destaque">Nível da vaga</p>
+                                </div>
+                            </div>
+                            <p class="descricao">Requisitos faltantes:</p>
+                            <section id="requisitos-faltantes-vaga-destaque" class="conjunto conjunto-desativado">
+                                
+                            </section>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="descricao">Salário:</p>
+                        <p id="salario-vaga-destaque">Salário</p>
+                    </div>
+                </div>
+                <div class="card" id="recomendacoes">
+                    <h2>Recomendações de estudo</h2>
+                    <section id="recomendacoes-estudo" class="conjunto conjunto-ativado">
+                        <div>Requisito</div>
+                        <div>Requisito</div>
+                        <div>Requisito</div>
+                        <div>Requisito</div>
+                    </section>
+                </div>
+            </section>
+            <section id="vagas">
+                
+            </section>
+            <div id="buscas-ate-momento" class="card">
+                <p>Buscas até o momento: </p>
+                <p id="buscas"></p>
+            </div>
+            <div id="btns-avancar-voltar" class="card">
+                <button aria-label="Voltar página" id="btn-voltar-vagas"></button>
+                <div id="mascara-slider-paginas">
+                    <p id="paginas-disponiveis"></p>
+                </div>
+                <button aria-label="Avançar página" id="btn-avancar-vagas"></button>
+            </div>
+        </div>
+        <aside id="analise" class="card">
+            <button aria-label="Fechar análise" id="btn-fechar-analise" class="btn-fechar"></button>
+            <div>
+                <h2>Análise</h2>
+                <div>
+                    <p class="descricao">Classificação:</p>
+                    <p id="classificacao-analise">Classificação</p>
+                </div>
+                <div>
+                    <p class="descricao">Compatibilidade:</p>
+                    <p id="compatibilidade-analise">Compatibilidade</p>
+                </div>
+                <div class="container-duplo">
+                    <div>
+                        <p>Nome da Empresa:</p>
+                        <p id="nome-empresa-analise">Nome da Empresa</p>
+                    </div>
+                    <div>
+                        <p>Nível da vaga:</p>
+                        <p id="nivel-vaga-analise">Nível da vaga</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="descricao">Habilidades encontradas:</p>
+                    <section class="conjunto conjunto-ativado" id="habilidades-encontradas-analise">
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                    </section>
+                </div>
+                <div>
+                    <p class="descricao">Habilidades faltantes:</p>
+                    <section class="conjunto conjunto-desativado" id="habilidades-faltantes-analise">
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                        <div>Habilidade</div>
+                    </section>
+                </div>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        <p>Desenvolvido por</p>
+        <a aria-label="Ir para site pessoal do desenvolvedor" href="https://cauacosta18.github.io/Portfolio/" target="_blank">Cauã Luiz Costa</a>
+    </footer>
+    <div id="alerta" aria-live="polite">mensagem</div>
+    <script type="module" src="paginaVagas.js"></script>
+</body>
+</html>
