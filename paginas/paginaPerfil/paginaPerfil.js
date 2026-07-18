@@ -1,6 +1,11 @@
-import { Candidato } from "./../../skillmatch.js";
-import { transformarLocalstorage, acionarModoExibicao } from "./../../skillmatch.js";
+import { Candidato } from "./../../candidatos.js";
+import { transformarLocalstorage, acionarModoExibicao } from "./../../utilidades.js";
 
+// ==========================
+// Fluxo principal do perfil
+// ==========================
+
+// Fluxo de carregamento do usuário: redireciona para login quando não há sessão ativa.
 if (!localStorage.getItem("usuarioAtual")) {
     window.location.href = "./../paginaLogin/paginaLogin.html";
 }
@@ -28,13 +33,16 @@ for (const habilidade of usuarioAtual.habilidades) {
     habilidadesUsuario.innerHTML += `<div>${habilidade}</div>`;
 }
 
+// Fluxo de logout e navegação: encerra a sessão atual e volta para a tela de login.
 let btnSair = document.getElementById("btn-sair");
 
 btnSair.addEventListener("click", ()=> {
-    localStorage.clear();
+    localStorage.removeItem("usuarioAtual");
+    localStorage.removeItem("filtro");
     window.location.href = "./../paginaLogin/paginaLogin.html";
 })
 
+// Fluxo de tema e navegação: alterna o modo visual e reaplica as cores da interface.
 let modoAtual = "escuro";
 
 let btnTrocarModo = document.getElementById("btn-trocar-modo");

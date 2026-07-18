@@ -1,11 +1,13 @@
-import { ativarAlerta, transformarLocalstorage } from "./../../skillmatch.js";
-import { buscarVagas } from "./../../skillmatch.js";
-import { Candidato } from "./../../skillmatch.js";
-import { VagaFrontEnd } from "./../../skillmatch.js";
-import { CompatibilidadeInfo } from "./../../skillmatch.js";
-import { buscarSugestoes } from "./../../skillmatch.js";
-import { animarCirculoCarregamento, contarBuscas, acionarModoExibicao } from "./../../skillmatch.js";
+import { ativarAlerta, transformarLocalstorage, animarCirculoCarregamento, acionarModoExibicao } from "./../../utilidades.js";
+import { buscarVagas, VagaFrontEnd, CompatibilidadeInfo, buscarSugestoes } from "./../../vagas.js";
+import { Candidato } from "./../../candidatos.js";
+import { contarBuscas } from "./../../skillmatch.js";
 
+// ==========================
+// Fluxo principal da página de vagas
+// ==========================
+
+// Fluxo de estado inicial: prepara os elementos da página e os dados do usuário logado.
 let navHeader = document.getElementById("nav-header");
 let sugestoes = document.getElementById("sugestoes");
 let link = document.createElement("a");
@@ -22,6 +24,7 @@ let carregandoDiv = document.getElementById("carregando");
 
 let circulo = document.getElementById("circulo-carregando");
 
+// Fluxo de carregamento: exibe ou esconde a tela de espera enquanto as vagas são buscadas.
 let interval;
 function toggleCarregando() {
     if (!carregando) {
@@ -100,6 +103,7 @@ async function buscarVagasCadastradas() {
     }
 }
 
+// Fluxo de paginação: divide as vagas em grupos para exibição progressiva.
 let paginaAtual = 1;
 let vagasPorPagina = 3;
 
@@ -164,6 +168,7 @@ function filtrarVagas() {
 
 let vagasFiltradas;
 
+// Fluxo de renderização das vagas: monta visualmente os cards com requisitos e compatibilidade.
 function prepararVagas() {
     vagas.innerHTML = "";
     
@@ -393,9 +398,8 @@ if (!temToque) {
 
 
 
+// Fluxo de análise da vaga: exibe o painel lateral com compatibilidade e habilidades.
 let vagaAtiva;
-
-
 
 function displayAnalise(vaga) {
 
@@ -548,6 +552,7 @@ let compatibilidadesInfoPorVaga = [];
 
 let tecnologias = [];
 
+// Fluxo de sugestões: calcula a vaga com maior compatibilidade e reúne recomendações de estudo.
 function prepararSugestoes(vagas) {
     sugestoes.style.display = "flex";
 
@@ -655,10 +660,29 @@ let btnVoltarVagas = document.getElementById("btn-voltar-vagas");
 let numeroDePaginas;
 
 btnAvancarVagas.addEventListener("click", ()=>{
+    console.log(numeroDePaginas);
+    
+    if ((paginaAtual + 1) === numeroDePaginas) {
+        console.log(numeroDePaginas);
+        btnAvancarVagas.classList.add("btn-inativo");
+    } else {
+        btnAvancarVagas.classList.remove("btn-inativo");
+        btnVoltarVagas.classList.remove("btn-inativo");
+    }
+    
     vagasAvancarVoltar(true)
 })
 
 btnVoltarVagas.addEventListener("click", ()=>{
+
+    if ((paginaAtual - 1) === 1 ) {
+        btnVoltarVagas.classList.add("btn-inativo");
+        
+    } else {
+        btnAvancarVagas.classList.remove("btn-inativo");
+        btnVoltarVagas.classList.remove("btn-inativo");
+    }
+
     vagasAvancarVoltar(false)
 })
 
@@ -716,6 +740,7 @@ let tecnologiasFiltroCheckboxes = document.querySelectorAll(".tecnologia-filtro"
 let btnAplicarFiltros = document.getElementById("btn-aplicar-filtros");
 let filtroForm = document.getElementById("filtro-form");
 
+// Fluxo de filtros: reúne as condições aplicadas ao conjunto de vagas e persiste no localStorage.
 let filtro = {
     modalidade: "",
     nivel: "",
@@ -770,24 +795,15 @@ if (localStorage.getItem("filtro")) {
 let btnResetarFiltros = document.getElementById("btn-resetar-filtros");
 
 btnResetarFiltros.addEventListener("click", (event)=>{
-     
-       
+      
     filtro.modalidade = "";
-    
-
-    filtro.nivel = "";
-    
+    filtro.nivel = "";  
     filtro.minimo = null;
     filtro.maximo = 0;
- 
     filtro.cargo = ""
-    
-    
     filtro.empresa = "";
-    
     filtro.tecnologias = [];
     
-
     let filtroJson = JSON.stringify(filtro);
 
     localStorage.setItem("filtro", filtroJson);
@@ -854,6 +870,7 @@ filtroForm.addEventListener("submit", (event)=>{
 })
 
 
+// Fluxo de aplicação de filtros: recalcula as vagas e atualiza a UI com o novo resultado.
 function iniciarFiltragem () {
     sectionsVagas = [];
     vagaAtiva = undefined;

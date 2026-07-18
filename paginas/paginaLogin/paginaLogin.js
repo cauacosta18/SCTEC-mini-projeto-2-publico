@@ -1,6 +1,11 @@
-import { realizarLogin } from "./../../skillmatch.js";
-import { ativarAlerta, acionarModoExibicao } from "./../../skillmatch.js";
+import { realizarLogin } from "./../../candidatos.js";
+import { ativarAlerta, acionarModoExibicao } from "./../../utilidades.js";
 
+// ==========================
+// Fluxo principal de login
+// ==========================
+
+// Fluxo de autenticação: valida os campos e tenta realizar o login com o candidato informado.
 let senhaInput = document.getElementById("senha");
 let emailInput = document.getElementById("email");
 let btnLogin = document.getElementById("btn-login");
@@ -40,6 +45,7 @@ form.addEventListener("submit", async(event)=>{
 
 let alerta = document.getElementById("alerta");
 
+// Fluxo de tema e navegação: aplica o modo visual e salva a preferência no localStorage.
 let modoAtual = "escuro";
 
 let btnTrocarModo = document.getElementById("btn-trocar-modo");

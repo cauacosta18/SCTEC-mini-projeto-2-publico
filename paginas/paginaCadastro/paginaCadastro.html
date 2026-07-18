@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Acesse sua conta no SkillMatch para visualizar vagas, analisar sua compatibilidade e gerenciar seu perfil profissional.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatch JS</title>
+    <link rel="stylesheet" href="paginaCadastro.css">
+    <link rel="stylesheet" href="./../../estilo/style.css">
+    <link rel="shortcut icon" href="./../../img/icones/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <h1>SkillMatch JS</h1>
+        <nav id="nav-header">
+            <button id="btn-trocar-modo" class="btn-destaque">Modo claro</button>
+            <a href="./../paginaVagas/paginaVagas.html">vagas</a>
+            <a href="./../paginaLogin/paginaLogin.html">login</a>
+            <a href="./../paginaCadastro/paginaCadastro.html">cadastro</a>
+            
+        </nav>
+    </header>
+    <main>
+        <form action="#" class="card" id="form">
+            <div id="titulo-form">
+                <p>Realize seu</p>
+                <h2>Cadastro</h2>
+            </div>
+            <div id="barra-progresso-cadastro">
+                <div class="etapa etapa-atual" id="etapa-1"></div>
+                <div class="etapa" id="etapa-2"></div>
+                <div class="etapa" id="etapa-3"></div>
+            </div>
+            <div id="etapas-cadastro">
+                <section class="etapa-cadastro" id="dados-iniciais-cadastro">
+                    <div class="campo-form">
+                        <label for="email">Nome:</label>
+                        <input type="text" name="nome" id="nome">
+                    </div>
+                    <div class="campo-form">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="campo-form">
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" id="senha">
+                    </div>
+                </section>
+                <section class="etapa-cadastro" id="dados-profissionais">
+                    <div class="campo-form">
+                        <label for="area">Área:</label>
+                        <select name="area" id="area">
+                            <option value="nenhum"></option>
+                            <option value="Front-end">Front-end</option>
+                        </select>
+                    </div>
+                    <div class="campo-form">
+                        <label for="experiencia">Experiência:</label>
+                        <input type="number" min="0" name="experiencia" id="experiencia">
+                    </div>
+                </section>
+                <section class="etapa-cadastro">
+                    <p>Habilidades</p>
+                    <section id="habilidades-cadastro">
+
+                    </section>
+                    
+                </section>
+            </div>
+            <div id="btns-voltar-avancar">
+                <button type="button" class="btn-destaque btn-inativo" id="btn-voltar">Voltar</button>
+                <button type="button" class="btn-destaque" id="btn-avancar">Avançar</button>
+            </div>
+            <button style="display: none;" type="submit" class="btn-destaque" id="btn-cadastro">Fazer Cadastro</button>
+            <button type="reset" class="btn-destaque" id="btn-resetar">Resetar</button>
+            <div class="mensagem-fim-form">
+                <p >Já possui uma conta?</p>
+                <a href="./../paginaLogin/paginaLogin.html">Faça o login</a>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Desenvolvido por</p>
+        <a href="https://cauacosta18.github.io/Portfolio/" target="_blank">Cauã Luiz Costa</a>
+    </footer>
+    <div id="alerta" aria-live="polite">Mensagem</div>
+    <script type="module" src="paginaCadastro.js"></script>
+</body>
+</html>
