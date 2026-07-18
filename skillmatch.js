@@ -323,6 +323,28 @@ async function buscarCandidatosSimulados() {
   
   let candidatos = await resposta.json();
 
+  if (localStorage.getItem("candidatos-cadastrados")) {
+    
+    let string = localStorage.getItem("candidatos-cadastrados");
+    let candidatosCadastrados = JSON.parse(string);
+
+    for (const candidatoLocalStorage of candidatosCadastrados) {
+      let candidato = {
+        nome: candidatoLocalStorage.nome,
+        area: candidatoLocalStorage.area,
+        email: candidatoLocalStorage.email,
+        senha: candidatoLocalStorage.senha,
+        habilidades: candidatoLocalStorage.habilidades,
+        experienciaMeses: candidatoLocalStorage.experiencia
+      }
+
+      
+      
+      candidatos.push(candidato);
+
+    }
+  }
+
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(
@@ -343,7 +365,8 @@ async function buscarCandidatosSimulados() {
 }
 
 // Busca os candidatos cadastrados
-async function buscarCandidatos() {
+export async function buscarCandidatos() {
+  
   const candidatosCarregados = await buscarCandidatosSimulados();
   return candidatosCarregados;
 }
@@ -355,10 +378,10 @@ async function verificarEmailSenha(input) {
     loginRealizado: false,
   };
   const candidatosCarregados = await buscarCandidatos();
-
+  
   let candidatoEncontrado = candidatosCarregados.find(
     (candidato) => candidato.email === input.email,
-  );
+  );  
 
   if (candidatoEncontrado !== undefined) {
     resultado.candidato = candidatoEncontrado;
@@ -471,6 +494,24 @@ export function buscarSugestoes(candidato, vagas, vagasTotais) {
   respostaBusca.tecnologias = respostaSugestao.tecnologias;
 
   return respostaBusca;
+}
+
+// Retorna todas as habilidades disponíveis para cadastro
+export async function buscarHabilidadesDisponiveis() {
+  const resposta = await buscarVagas();
+  const vagas = resposta.vagasCarregadas;
+
+  const habilidades = [];
+
+  for (const vaga of vagas) {
+    for (const requisito of vaga.requisitos) {
+      if (!habilidades.includes(requisito)) {
+        habilidades.push(requisito);
+      }
+    }
+  }
+
+  return habilidades;
 }
 
 // ---------------------------------------------------------------------------

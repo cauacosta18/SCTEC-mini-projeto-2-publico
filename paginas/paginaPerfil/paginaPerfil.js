@@ -31,7 +31,8 @@ for (const habilidade of usuarioAtual.habilidades) {
 let btnSair = document.getElementById("btn-sair");
 
 btnSair.addEventListener("click", ()=> {
-    localStorage.clear();
+    localStorage.removeItem("usuarioAtual");
+    localStorage.removeItem("filtro");
     window.location.href = "./../paginaLogin/paginaLogin.html";
 })
 

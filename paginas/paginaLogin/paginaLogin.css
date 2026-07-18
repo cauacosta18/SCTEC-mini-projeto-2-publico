@@ -33,6 +33,29 @@
     width: 100%;
 }
 
+.mensagem-fim-form {
+    text-align: center;
+    flex-direction: column;
+    font-size: 0.8em;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.mensagem-fim-form * {
+    display: flex;
+}
+
+.mensagem-fim-form a:hover {
+    transform: translateY(-2px);
+}
+
+.mensagem-fim-form a:active {
+    transform: scale(0.95);
+}
+
 @media (max-width: 768px) {
     #form {
         width: 70%;
