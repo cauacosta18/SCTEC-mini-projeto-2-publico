@@ -2,14 +2,11 @@
 
 ## Backlog
 
-- Preparar vídeo de apresentação
-
 ---
 
 ## A Fazer
 
-- Criar fluxo de cadastro
-- Organizar arquivos do sistema
+- Preparar vídeo de apresentação
 
 ---
 
@@ -46,3 +43,5 @@
 - Criar tela de perfil do usuário
 - Criar tela de vagas encontradas
 - Implementar funcionalidade de análise de compatibilidade
+- Criar fluxo de cadastro
+- Organizar arquivos do sistema
