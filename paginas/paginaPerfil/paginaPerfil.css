@@ -36,6 +36,9 @@
 }
 
 
+/* ==========================
+   Responsividade
+   ========================== */
 @media (max-width: 768px) {
     #perfil {
         width: 70%;

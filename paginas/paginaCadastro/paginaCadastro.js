@@ -1,5 +1,12 @@
-import { buscarHabilidadesDisponiveis, ativarAlerta, acionarModoExibicao, buscarCandidatos } from "./../../skillmatch.js";
+import { buscarHabilidadesDisponiveis } from "./../../vagas.js";
+import { ativarAlerta, acionarModoExibicao } from "./../../utilidades.js";
+import { buscarCandidatos } from "./../../candidatos.js";
 
+// ==========================
+// Fluxo principal do cadastro
+// ==========================
+
+// Fluxo de tema e navegação: alterna o modo visual e salva o estado no localStorage.
 let modoAtual = "escuro";
 
 let btnTrocarModo = document.getElementById("btn-trocar-modo");
@@ -41,6 +48,7 @@ if (localStorage.getItem("usuarioAtual")) {
     navHeader.appendChild(link);
 } 
 
+// Fluxo de persistência do formulário: guarda os dados parcialmente preenchidos para recuperação.
 let candidatosCadastrados = [];
 
 let cadastro = {
@@ -137,6 +145,7 @@ async function carregarHabilidades() {
 
 }
 
+// Fluxo de carregamento das habilidades: popula as opções do formulário com base nas vagas.
 let nome = document.getElementById("nome");
 nome.addEventListener("change", ()=> {
     cadastro.nome = nome.value;
@@ -192,6 +201,7 @@ for (const habilidadeCheckbox of habilidadeCadastroCheckboxes) {
 
 let alerta = document.getElementById("alerta");
 
+// Fluxo de envio do formulário: valida campos, evita e-mails duplicados e salva o cadastro.
 function buscarHabilidadesEscolhidas() {
 
     let habilidadesEscolhidas = [];
@@ -263,6 +273,7 @@ form.addEventListener("submit", async (event)=> {
 
 })
 
+// Fluxo do wizard de etapas: controla a navegação entre os passos do cadastro.
 let etapaAtual = 1;
 let btnAvancar = document.getElementById("btn-avancar");
 let btnVoltar = document.getElementById("btn-voltar");
@@ -314,7 +325,13 @@ function mudarEtapas() {
 
 btnVoltar.addEventListener("click", ()=> {
     if (etapaAtual !== 1) {
+        btnVoltar.classList.remove("btn-inativo")
+        btnAvancar.classList.remove("btn-inativo")
         etapaAtual--;
+    }
+
+    if (etapaAtual === 1) {
+        btnVoltar.classList.add("btn-inativo")
     }
 
     mudarEtapas();
@@ -333,7 +350,13 @@ btnAvancar.addEventListener("click", ()=> {
     }
 
     if (etapaAtual !== 3) {
+        btnVoltar.classList.remove("btn-inativo")
+        btnAvancar.classList.remove("btn-inativo")
         etapaAtual++;
+    }
+
+    if (etapaAtual === 3) {
+        btnAvancar.classList.add("btn-inativo")
     }
     
     mudarEtapas();

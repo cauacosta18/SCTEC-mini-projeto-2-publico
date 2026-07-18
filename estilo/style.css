@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* ==========================
+   Base e reset global
+   ========================== */
 :root {
     --fundo-secundario: #191A1B;
     --fundo-principal: #32373B;
@@ -77,6 +80,9 @@ h1, h2, h3, h4 {
     font-size: 1em;
 }
 
+/* ==========================
+   Estrutura principal da página
+   ========================== */
 header {
     display: flex;
     position: sticky;
@@ -128,6 +134,9 @@ main {
     min-height: 90vh;
 }
 
+/* ==========================
+   Formulários e componentes visuais
+   ========================== */
 input, select {
     background-color: transparent;
     border: none;
@@ -288,6 +297,9 @@ input[type="checkbox"] ~ label:active {
     font-size: 0.8em;
 }
 
+/* ==========================
+   Estados e feedback visual
+   ========================== */
 #carregando {
     display: flex;
     height: 80vh;
@@ -374,6 +386,14 @@ input[type="checkbox"] ~ label:active {
     transform: translateX(4px) rotate(-45deg);
 }
 
+.btn-inativo {
+    opacity: 50%;
+    pointer-events: none;
+}
+
+/* ==========================
+   Responsividade
+   ========================== */
 @media (max-width: 768px) {
     #alerta {
         max-width: 80vw;

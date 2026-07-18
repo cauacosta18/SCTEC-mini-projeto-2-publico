@@ -1,4 +1,7 @@
 
+/* ==========================
+   Layout da página de vagas
+   ========================== */
 #sugestoes {
     display: flex;
     flex-direction: row;
@@ -112,6 +115,9 @@
     word-break: break-all;
 }
 
+/* ==========================
+   Cards e análise de compatibilidade
+   ========================== */
 #vagas {
     display: flex;
     flex-direction: row;
@@ -123,7 +129,7 @@
 
 .vaga {
     display: flex;
-    min-width: 15em;
+    min-width: 20em;
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
@@ -296,6 +302,9 @@
     align-self: center;
 }
 
+/* ==========================
+   Filtros e paginação
+   ========================== */
 #filtro-form {
     display: flex;
     position: relative;
@@ -407,6 +416,9 @@
 
 
 
+/* ==========================
+   Responsividade
+   ========================== */
 @media (max-width: 1100px) {
 
    
