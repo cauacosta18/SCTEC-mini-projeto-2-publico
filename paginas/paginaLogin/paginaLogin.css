@@ -11,6 +11,15 @@
 
 #titulo-form h2 {
     font-size: 2em;
+    margin: 10px;
+}
+
+#titulo-form h2 span {
+    background-color: var(--cor-destaque);
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    color: var(--cor-escura-permanente);
 }
 
 .campo-form {
