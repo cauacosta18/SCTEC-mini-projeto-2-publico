@@ -6,200 +6,194 @@ O **SkillMatch JS** é um simulador de compatibilidade entre candidatos e vagas 
 
 O sistema compara as habilidades de um candidato com os requisitos exigidos pelas vagas cadastradas e apresenta:
 
-* percentual de compatibilidade;
-* habilidades encontradas;
-* habilidades faltantes;
-* classificação da compatibilidade;
-* vaga mais compatível;
-* recomendações de estudo.
+- percentual de compatibilidade;
+- habilidades encontradas;
+- habilidades faltantes;
+- classificação da compatibilidade;
+- vaga mais compatível;
+- recomendações de estudo.
 
-O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no Módulo 01 do curso de Programação Front-End React.
+O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no módulo de programação Front-End e está organizado em uma estrutura multi-página com fluxo de login, cadastro, perfil e vagas.
+
+## Link do Trello
+
+- [Quadro no Trello](https://trello.com/invite/b/6a0bbe22bc0ad62df6e6208e/ATTIf97ca15e442ac1f47e3e176c40c2ecb325401D71/sctec-mini-projeto)
 
 ---
 
-## Funcionalidades
+## Funcionalidades implementadas
 
-### Sistema de Login
+### 1. Sistema de login
 
-O usuário pode realizar login utilizando email e senha de candidatos cadastrados no sistema.
+O usuário pode realizar login utilizando e-mail e senha de candidatos cadastrados no sistema.
 
-### Visualização de vagas
+### 2. Cadastro de candidatos
 
-O sistema exibe todas as vagas disponíveis com:
+É possível cadastrar novos candidatos, com nome, e-mail, senha, área, experiência e habilidades. Os dados são persistidos no localStorage.
 
-* empresa;
-* cargo;
-* requisitos;
-* salário;
-* modalidade;
-* nível da vaga.
+### 3. Tela de perfil
 
-### Compatibilidade entre candidato e vaga
+A página de perfil exibe os dados do usuário logado, incluindo nome, e-mail, área, experiência e habilidades.
 
-O sistema calcula automaticamente a compatibilidade do candidato com cada vaga com base nas habilidades atendidas.
+### 4. Visualização de vagas
 
-### Classificação automática
+O sistema exibe vagas com informações como:
+
+- empresa;
+- cargo;
+- requisitos;
+- salário;
+- modalidade;
+- nível da vaga.
+
+### 5. Compatibilidade entre candidato e vaga
+
+O sistema calcula automaticamente a compatibilidade entre o usuário logado e cada vaga com base nas habilidades atendidas.
+
+### 6. Classificação automática
 
 As vagas são classificadas em:
 
-* Alta compatibilidade;
-* Média compatibilidade;
-* Baixa compatibilidade.
+- Alta compatibilidade;
+- Média compatibilidade;
+- Baixa compatibilidade.
 
-### Recomendação de estudos
+### 7. Recomendação de estudos
 
-O sistema identifica habilidades faltantes e sugere conteúdos prioritários para estudo.
+O projeto identifica requisitos não atendidos e sugere habilidades prioritárias para estudo.
 
-### Simulação de carregamento
+### 8. Tema claro/escuro
 
-As vagas e candidatos são carregados utilizando `Promise` e `async/await`, simulando uma busca em servidor.
+A interface possui alternância entre modo claro e escuro, com persistência no localStorage.
 
-### Contador de buscas
+### 9. Feedback visual
 
-O projeto utiliza um `closure` para armazenar a quantidade de buscas realizadas durante a execução.
+O sistema exibe alertas e animações de carregamento para melhorar a experiência do usuário.
+
+---
+
+## Requisitos atendidos
+
+Este projeto já contempla os principais requisitos esperados para o mini-projeto, incluindo:
+
+- login com validação de usuário;
+- cadastro de candidatos;
+- persistência de dados no localStorage;
+- tela de perfil do usuário;
+- tela de vagas com filtros e compatibilidade;
+- cálculo e classificação de compatibilidade;
+- uso de POO, arrays, callbacks, closures, Promises e async/await;
+- organização do código em módulos JavaScript.
+
+> Observação: o vídeo de apresentação ainda não está incluído no projeto.
 
 ---
 
 ## Conceitos utilizados
 
-O projeto foi desenvolvido utilizando os seguintes conceitos:
+O projeto foi desenvolvido utilizando conceitos de:
 
-* lógica de programação;
-* JavaScript;
-* tipos de dados;
-* condicionais;
-* operadores;
-* escopo;
-* laços de repetição;
-* funções;
-* arrow functions;
-* arrays;
-* métodos de array (`map`, `find`, `every`);
-* objetos;
-* Programação Orientada a Objetos (POO);
-* classes;
-* construtores;
-* herança;
-* uso do `this`;
-* callbacks;
-* closures;
-* Promises;
-* async/await;
-* Git e GitHub;
-* Kanban.
+- lógica de programação;
+- JavaScript;
+- tipos de dados;
+- condicionais;
+- operadores;
+- escopo;
+- laços de repetição;
+- funções;
+- arrow functions;
+- arrays;
+- métodos de array como map, find, filter e every;
+- objetos;
+- Programação Orientada a Objetos (POO);
+- classes;
+- construtores;
+- herança;
+- uso do this;
+- callbacks;
+- closures;
+- Promises;
+- async/await;
+- fetch para carregar dados locais;
+- LocalStorage;
+- Git e GitHub;
+- Kanban.
 
 ---
 
 ## Estrutura do projeto
 
 ```txt
-sctec-mini-projeto/
+sctec-mini-projeto-2/
 │
-├── index.html
 ├── README.md
-├── skillmatch.js
+├── index.html
+├── dados/
+│   ├── candidatos.json
+│   └── vagas.json
+├── estilo/
+│   └── style.css
+├── img/
+│   └── icones/
+├── motor/
+│   ├── candidatos.js
+│   ├── vagas.js
+│   ├── utilidades.js
+│   ├── skillmatch.js
+│   └── script.js
+├── ui/
+│   ├── paginaLogin/
+│   │   ├── paginaLogin.html
+│   │   ├── paginaLogin.css
+│   │   └── paginaLogin.js
+│   ├── paginaCadastro/
+│   │   ├── paginaCadastro.html
+│   │   ├── paginaCadastro.css
+│   │   └── paginaCadastro.js
+│   ├── paginaPerfil/
+│   │   ├── paginaPerfil.html
+│   │   ├── paginaPerfil.css
+│   │   └── paginaPerfil.js
+│   └── paginaVagas/
+│       ├── paginaVagas.html
+│       ├── paginaVagas.css
+│       └── paginaVagas.js
 └── planejamento/
-    └── tarefas-kanban.md
+    └── tarefas-kanbam.md
 ```
+
+### Arquitetura atual
+
+- A pasta [motor](motor) concentra os módulos JavaScript reutilizáveis com a lógica de candidatos, vagas, compatibilidade e utilidades.
+- A pasta [ui](ui) reúne as páginas do sistema, cada uma com seu próprio HTML, CSS e JavaScript.
+- Os arquivos JSON em [dados](dados) simulam a base de candidatos e vagas do projeto.
+- O arquivo [index.html](index.html) funciona como ponto de entrada e redireciona para a tela de login.
 
 ---
 
 ## Tecnologias utilizadas
 
-* JavaScript
-* Git
-* GitHub
-* VS Code
-
----
-
-## Métodos de Array utilizados
-
-O projeto utiliza diversos métodos de array para manipulação dos dados:
-
-| Método    | Utilização                                               |
-| --------- | -------------------------------------------------------- |
-| `map()`   | Transformar candidatos e vagas em instâncias de classes  |
-| `find()`  | Buscar vagas e candidatos específicos                    |
-| `every()` | Verificar se todos os requisitos da vaga foram atendidos |
-
----
-
-## Conceitos de POO aplicados
-
-O projeto aplica conceitos de Programação Orientada a Objetos utilizando:
-
-### Classe base
-
-```js
-class Vaga
-```
-
-### Herança
-
-```js
-class VagaFrontEnd extends Vaga
-```
-
-## Callback utilizado
-
-O projeto utiliza callback na função:
-
-```js
-processarVagas(vagas, callback)
-```
-
-Após o processamento das vagas, uma função é executada para exibir a quantidade de vagas encontradas.
-
----
-
-## Closure utilizado
-
-O projeto utiliza closure para criar um contador de buscas:
-
-```js
-function criarContadorBuscas()
-```
-
-O valor da variável interna permanece armazenado entre as execuções da função.
-
----
-
-## Simulação de servidor
-
-O projeto utiliza:
-
-* `Promise`
-* `setTimeout`
-* `async/await`
-
-para simular carregamento de dados vindos de um servidor.
+- JavaScript
+- HTML
+- CSS
+- Git
+- GitHub
+- VS Code
 
 ---
 
 ## Como executar o projeto
 
-O projeto foi desenvolvido utilizando JavaScript puro e pode ser executado diretamente no navegador.
+Para visualizar o projeto corretamente, recomenda-se abrir a pasta no VS Code e utilizar uma extensão como Live Server para servir os arquivos localmente.
 
 ### Passo a passo
 
-1. Clone o repositório:
-
-```bash id="qkg6y7"
-git clone <url-do-repositorio>
-```
-
-2. Abra a pasta do projeto no VS Code.
-
-3. Abra o seguinte arquivo no navegador:
-
-```txt id="7jlwmv"
-index.html
-```
-
-4. O sistema iniciará automaticamente.
-
-5. Faça o login e acesse as funcionalidades do sistema.
+1. Clone o repositório.
+2. Abra a pasta no VS Code.
+3. Inicie um servidor local, como o Live Server.
+4. Abra a página de login em:
+   - [ui/paginaLogin/paginaLogin.html](ui/paginaLogin/paginaLogin.html)
+5. Faça login com um dos usuários de teste abaixo.
 
 ---
 
@@ -211,25 +205,25 @@ O sistema possui candidatos cadastrados para simulação de login.
 
 Todos os usuários utilizam a seguinte senha:
 
-```txt id="y4wb14"
+```txt
 123
 ```
 
-### Emails disponíveis
+### E-mails disponíveis
 
-| Nome     | Email                |
-| -------- | -------------------- |
-| Ana      | `ana@email.com`      |
-| Carlos   | `carlos@email.com`   |
-| Marina   | `marina@email.com`   |
-| Lucas    | `lucas@email.com`    |
-| Fernanda | `fernanda@email.com` |
-| Rafael   | `rafael@email.com`   |
-| Juliana  | `juliana@email.com`  |
-| Pedro    | `pedro@email.com`    |
+| Nome     | E-mail                |
+| -------- | --------------------- |
+| Ana      | ana@email.com         |
+| Carlos   | carlos@email.com      |
+| Marina   | marina@email.com      |
+| Lucas    | lucas@email.com       |
+| Fernanda | fernanda@email.com    |
+| Rafael   | rafael@email.com      |
+| Juliana  | juliana@email.com     |
+| Pedro    | pedro@email.com       |
 
 ---
 
 ## Autor
 
-Projeto desenvolvido por Cauã Luiz Costa para o Mini-Projeto Avaliativo do Módulo 01 de Programação Front-End React.
+Projeto desenvolvido por Cauã Luiz Costa para o Mini-Projeto Avaliativo do módulo de Programação Front-End.

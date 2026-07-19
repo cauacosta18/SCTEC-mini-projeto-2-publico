@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gerencie seu perfil profissional no SkillMatch, atualize suas habilidades e acompanhe sua compatibilidade com as vagas.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatch JS</title>
+    <link rel="stylesheet" href="paginaPerfil.css">
+    <link rel="stylesheet" href="./../../estilo/style.css">
+    <link rel="shortcut icon" href="./../../img/icones/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>SkillMatch <span>JS</span></h1>
+        <nav id="nav-header">
+            <button id="btn-trocar-modo" class="btn-destaque">Modo claro</button>
+            <a href="./../paginaVagas/paginaVagas.html">vagas</a>
+            <a href="./../paginaLogin/paginaLogin.html">login</a>
+            <a href="./../paginaCadastro/paginaCadastro.html">cadastro</a>
+            <a href="#">perfil</a>
+        </nav>
+    </header>
+    <main>
+        <section class="card" id="perfil">
+            <img id="foto-usuario" src="" alt="">
+            <div id="titulo-perfil">
+                <h2 id="nome-usuario">Nome do Usuário</h2>
+                <p id="email-usuario">email@email.com</p>
+            </div>
+            <div class="container-duplo">
+                <div>
+                    <h3>Area:</h3>
+                    <p id="area-usuario">Area</p>
+                </div>
+                <div>
+                    <h3>Experiência:</h3>
+                    <p id="experiencia-usuario">Experiência</p>
+                </div>
+            </div>
+            <div id="habilidades-perfil">
+                <h3>Habilidades</h3>
+                <section id="habilidades-usuario" class="conjunto conjunto-ativado">
+                    <div>Habilidade</div>
+                    <div>Habilidade</div>
+                    <div>Habilidade</div>
+                    <div>Habilidade</div>
+                </section>
+            </div>
+            <button class="btn-destaque" id="btn-sair">Sair</button>
+        </section>
+    </main>
+    <footer>
+        <p>Desenvolvido por</p>
+        <a href="https://cauacosta18.github.io/Portfolio/" target="_blank">Cauã Luiz Costa</a>
+    </footer>
+    <script type="module" src="paginaPerfil.js"></script>
+</body>
+</html>

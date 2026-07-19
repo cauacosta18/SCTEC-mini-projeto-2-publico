@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Acesse sua conta no SkillMatch para visualizar vagas, analisar sua compatibilidade e gerenciar seu perfil profissional.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatch <span>JS</span></title>
+    <link rel="stylesheet" href="paginaLogin.css">
+    <link rel="stylesheet" href="./../../estilo/style.css">
+    <link rel="shortcut icon" href="./../../img/icones/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <h1>SkillMatch <span>JS</span></h1>
+        <nav id="nav-header">
+            <button id="btn-trocar-modo" class="btn-destaque">Modo claro</button>
+            <a href="./../paginaVagas/paginaVagas.html">vagas</a>
+            <a href="#">login</a>
+            <a href="./../paginaCadastro/paginaCadastro.html">cadastro</a>
+            
+        </nav>
+    </header>
+    <main>
+        <form action="#" class="card" id="form">
+            <div id="titulo-form">
+                <p>Bem-vindo ao</p>
+                <h2>SkillMatch <span>JS</span></h2>
+            </div>
+            <div class="campo-form">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="campo-form">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha">
+            </div>
+            <button type="submit" class="btn-destaque" id="btn-login">Fazer Login</button>
+            <div class="mensagem-fim-form">
+                <p >Não possui uma conta?</p>
+                <a href="./../paginaCadastro/paginaCadastro.html">Faça o cadastro</a>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Desenvolvido por</p>
+        <a href="https://cauacosta18.github.io/Portfolio/" target="_blank">Cauã Luiz Costa</a>
+    </footer>
+    <div id="alerta" aria-live="polite">Mensagem</div>
+    <script type="module" src="paginaLogin.js"></script>
+</body>
+</html>

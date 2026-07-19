@@ -6,6 +6,8 @@
 
 ## A Fazer
 
+- Preparar vídeo de apresentação
+
 ---
 
 ## Em Andamento
@@ -35,3 +37,11 @@
 - Atualizar README.md
 - Gravar vídeo demonstrando o projeto
 - Enviar links no AVA
+
+- Adaptar arquivo Skillmatch.js para implementação das páginas html
+- Criar tela de login
+- Criar tela de perfil do usuário
+- Criar tela de vagas encontradas
+- Implementar funcionalidade de análise de compatibilidade
+- Criar fluxo de cadastro
+- Organizar arquivos do sistema
