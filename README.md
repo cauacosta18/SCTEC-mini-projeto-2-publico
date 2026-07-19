@@ -134,13 +134,25 @@ sctec-mini-projeto-2/
 ├── estilo/
 │   └── style.css
 ├── img/
-│   └── icones/
+│   ├── icones/
+│   │    ├── about.txt
+│   │    ├── favicon.ico
+│   │    └── site.webmanifest
+│   └── candidatos/
+│       ├── ana.svg
+│       ├── carlos.svg
+│       ├── default.svg
+│       ├── fernanda.svg
+│       ├── juliana.svg
+│       ├── lucas.svg
+│       ├── marina.svg
+│       ├── pedro.svg
+│       └── rafel.svg
 ├── motor/
 │   ├── candidatos.js
 │   ├── vagas.js
 │   ├── utilidades.js
-│   ├── skillmatch.js
-│   └── script.js
+│   └── skillmatch.js
 ├── ui/
 │   ├── paginaLogin/
 │   │   ├── paginaLogin.html
