@@ -1,7 +1,7 @@
-import { ativarAlerta, transformarLocalstorage, animarCirculoCarregamento, acionarModoExibicao } from "./../../utilidades.js";
-import { buscarVagas, VagaFrontEnd, CompatibilidadeInfo, buscarSugestoes } from "./../../vagas.js";
-import { Candidato } from "./../../candidatos.js";
-import { contarBuscas } from "./../../skillmatch.js";
+import { ativarAlerta, transformarLocalstorage, animarCirculoCarregamento, acionarModoExibicao } from "../../motor/utilidades.js";
+import { buscarVagas, VagaFrontEnd, CompatibilidadeInfo, buscarSugestoes } from "../../motor/vagas.js";
+import { Candidato } from "../../motor/candidatos.js";
+import { contarBuscas } from "../../motor/skillmatch.js";
 
 // ==========================
 // Fluxo principal da página de vagas

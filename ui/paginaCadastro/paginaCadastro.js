@@ -1,6 +1,6 @@
-import { buscarHabilidadesDisponiveis } from "./../../vagas.js";
-import { ativarAlerta, acionarModoExibicao } from "./../../utilidades.js";
-import { buscarCandidatos } from "./../../candidatos.js";
+import { buscarHabilidadesDisponiveis } from "../../motor/vagas.js";
+import { ativarAlerta, acionarModoExibicao } from "../../motor/utilidades.js";
+import { buscarCandidatos } from "../../motor/candidatos.js";
 
 // ==========================
 // Fluxo principal do cadastro

@@ -1,5 +1,5 @@
-import { Candidato } from "./../../candidatos.js";
-import { transformarLocalstorage, acionarModoExibicao } from "./../../utilidades.js";
+import { Candidato } from "../../motor/candidatos.js";
+import { transformarLocalstorage, acionarModoExibicao } from "../../motor/utilidades.js";
 
 // ==========================
 // Fluxo principal do perfil

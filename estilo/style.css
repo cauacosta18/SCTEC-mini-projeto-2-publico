@@ -240,7 +240,7 @@ input[type="checkbox"] ~ label:active {
     background-color: var(--cor-destaque);
     padding: 10px 20px;
     border-radius: var(--border-radius);
-    color: var(--cor-fonte);
+    color: var(--cor-escura-permanente);
     cursor: default;
     bottom: -100px;
     transition: 200ms;
