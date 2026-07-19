@@ -15,6 +15,10 @@ O sistema compara as habilidades de um candidato com os requisitos exigidos pela
 
 O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no módulo de programação Front-End e está organizado em uma estrutura multi-página com fluxo de login, cadastro, perfil e vagas.
 
+## Link do Trello
+
+- [Quadro no Trello](https://trello.com/invite/b/6a0bbe22bc0ad62df6e6208e/ATTIf97ca15e442ac1f47e3e176c40c2ecb325401D71/sctec-mini-projeto)
+
 ---
 
 ## Funcionalidades implementadas
@@ -123,16 +127,21 @@ O projeto foi desenvolvido utilizando conceitos de:
 sctec-mini-projeto-2/
 │
 ├── README.md
-├── candidatos.js
-├── vagas.js
-├── utilidades.js
-├── skillmatch.js
+├── index.html
 ├── dados/
 │   ├── candidatos.json
 │   └── vagas.json
 ├── estilo/
 │   └── style.css
-├── paginas/
+├── img/
+│   └── icones/
+├── motor/
+│   ├── candidatos.js
+│   ├── vagas.js
+│   ├── utilidades.js
+│   ├── skillmatch.js
+│   └── script.js
+├── ui/
 │   ├── paginaLogin/
 │   │   ├── paginaLogin.html
 │   │   ├── paginaLogin.css
@@ -152,6 +161,13 @@ sctec-mini-projeto-2/
 └── planejamento/
     └── tarefas-kanbam.md
 ```
+
+### Arquitetura atual
+
+- A pasta [motor](motor) concentra os módulos JavaScript reutilizáveis com a lógica de candidatos, vagas, compatibilidade e utilidades.
+- A pasta [ui](ui) reúne as páginas do sistema, cada uma com seu próprio HTML, CSS e JavaScript.
+- Os arquivos JSON em [dados](dados) simulam a base de candidatos e vagas do projeto.
+- O arquivo [index.html](index.html) funciona como ponto de entrada e redireciona para a tela de login.
 
 ---
 
@@ -176,7 +192,7 @@ Para visualizar o projeto corretamente, recomenda-se abrir a pasta no VS Code e 
 2. Abra a pasta no VS Code.
 3. Inicie um servidor local, como o Live Server.
 4. Abra a página de login em:
-   - [paginas/paginaLogin/paginaLogin.html](paginas/paginaLogin/paginaLogin.html)
+   - [ui/paginaLogin/paginaLogin.html](ui/paginaLogin/paginaLogin.html)
 5. Faça login com um dos usuários de teste abaixo.
 
 ---
