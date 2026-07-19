@@ -15,6 +15,10 @@ O sistema compara as habilidades de um candidato com os requisitos exigidos pela
 
 O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no módulo de programação e desenvolvimento Front-End e está organizado em uma estrutura multi-página com fluxo de login, cadastro, perfil e vagas.
 
+## Link do projeto
+
+- [Acessar projeto no GitHub Pages](https://cauacosta18.github.io/SCTEC-mini-projeto-2-publico/ui/paginaLogin/paginaLogin.html)
+
 ## Link do Trello
 
 - [Quadro no Trello](https://trello.com/invite/b/6a0bbe22bc0ad62df6e6208e/ATTIf97ca15e442ac1f47e3e176c40c2ecb325401D71/sctec-mini-projeto)
