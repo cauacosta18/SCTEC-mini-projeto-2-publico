@@ -258,7 +258,7 @@
 
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 12px solid var(--fundo-secundario);
+    border-left: 12px solid var(--cor-escura-permanente);
 
 }
 
@@ -407,6 +407,7 @@
 .campo-filtro {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     
 }
 

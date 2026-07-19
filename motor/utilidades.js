@@ -49,23 +49,20 @@ export function acionarModoExibicao(document, modo) {
   switch (modo) {
     case "claro":
       document.documentElement.style.setProperty("--fundo-secundario", "#F3F7F0");
-      document.documentElement.style.setProperty("--cor-fonte", "#191A1B");
-      document.documentElement.style.setProperty("--cor-destaque", "#7584af");
-      document.documentElement.style.setProperty("--fundo-principal", "#5a6166");
+      document.documentElement.style.setProperty("--cor-fonte", "#141413");
+      document.documentElement.style.setProperty("--fundo-principal", "#c5c5be");
       break;
-
+      
     case "escuro":
-      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--fundo-secundario", "#141413");
       document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
-      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
-      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      document.documentElement.style.setProperty("--fundo-principal", "#3b3932");
       break;
-
+        
     default:
-      document.documentElement.style.setProperty("--fundo-secundario", "#191A1B");
+      document.documentElement.style.setProperty("--fundo-secundario", "#141413");
       document.documentElement.style.setProperty("--cor-fonte", "#F3F7F0");
-      document.documentElement.style.setProperty("--cor-destaque", "#8CA0D7");
-      document.documentElement.style.setProperty("--fundo-principal", "#32373B");
+      document.documentElement.style.setProperty("--fundo-principal", "#3b3932");
       break;
   }
 }

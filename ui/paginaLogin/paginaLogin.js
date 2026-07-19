@@ -1,5 +1,5 @@
-import { realizarLogin } from "./../../candidatos.js";
-import { ativarAlerta, acionarModoExibicao } from "./../../utilidades.js";
+import { realizarLogin } from "../../motor/candidatos.js";
+import { ativarAlerta, acionarModoExibicao } from "../../motor/utilidades.js";
 
 // ==========================
 // Fluxo principal de login

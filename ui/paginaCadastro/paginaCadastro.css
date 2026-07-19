@@ -1,5 +1,3 @@
-
-
 /* ==========================
    Layout do formulário de cadastro
    ========================== */
@@ -23,6 +21,42 @@
 
 .campo-form label {
     font-size: 0.8em;
+}
+
+#preview-foto {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    align-self: flex-start;
+    align-self: center;
+    border: 2px solid var(--cor-destaque);
+}
+
+.btn-escolher-foto {
+    background-color: var(--fundo-principal);
+    color: var(--cor-fonte);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+}
+
+.foto-adicionada {
+    background-color: var(--cor-destaque);
+    color: var(--cor-escura-permanente);
+}
+
+
+
+.btn-escolher-foto:hover {
+    transform: translateY(-2px);
+}
+
+.btn-escolher-foto:active {
+    transform: scale(0.95);
 }
 
 #form {

@@ -1,5 +1,5 @@
-import { Candidato } from "./../../candidatos.js";
-import { transformarLocalstorage, acionarModoExibicao } from "./../../utilidades.js";
+import { Candidato } from "../../motor/candidatos.js";
+import { transformarLocalstorage, acionarModoExibicao } from "../../motor/utilidades.js";
 
 // ==========================
 // Fluxo principal do perfil
@@ -21,6 +21,10 @@ let emailUsuario = document.getElementById("email-usuario");
 let areaUsuario = document.getElementById("area-usuario");
 let experienciaUsuario = document.getElementById("experiencia-usuario");
 let habilidadesUsuario = document.getElementById("habilidades-usuario");
+let fotoUsuario = document.getElementById("foto-usuario");
+
+fotoUsuario.src = usuarioAtual.hrefImagem || "./../../img/candidatos/default.svg";
+fotoUsuario.alt = `foto-${usuarioAtual.nome}`;
 
 nomeUsuario.textContent = usuarioAtual.nome;
 emailUsuario.textContent = usuarioAtual.email;

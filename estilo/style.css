@@ -4,14 +4,15 @@
    Base e reset global
    ========================== */
 :root {
-    --fundo-secundario: #191A1B;
-    --fundo-principal: #32373B;
-    --cor-destaque: #8CA0D7;
+    --fundo-secundario: #141413;
+    --fundo-principal: #3b3932;
+    --cor-destaque: #F9D86D;
     --cor-fonte: #F3F7F0;
-    --cor-fonte-fundo-escuro: #F3F7F0;
+    --cor-clara-permanente: #F3F7F0;
+    --cor-escura-permanente: #191A1B;
     --border-radius: 4px;
-    --shadow: 0 0 20px #00000050;
-    --brilho-destaque: 0 0 20px #8CA0D775;
+    --shadow: 0 0 5px #00000050;
+    --brilho-destaque: 0 0 5px #F9D86D75;
     --overflow-html: "visible";
 }
 
@@ -101,6 +102,14 @@ header h1 {
     font-size: 1.5em;
 }
 
+header h1 span {
+    background-color: var(--cor-destaque);
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    color: var(--cor-escura-permanente);
+}
+
 header nav {
     display: flex;
     gap: 20px;
@@ -170,7 +179,7 @@ input[type="checkbox"] ~ label {
     justify-content: center;
     align-items: center;
     flex: 1;
-    color: var(--cor-fonte-fundo-escuro);
+    color: var(--cor-fonte);
     box-shadow: var(--shadow);
     cursor: pointer;
     height: 100%;
@@ -183,7 +192,7 @@ input[type="checkbox"] ~ label {
 input[type="checkbox"]:checked ~ label {
     background-color: var(--cor-destaque);
     flex: 1;
-    color: var(--fundo-secundario);
+    color: var(--cor-escura-permanente);
     box-shadow: var(--shadow);
 }
 
@@ -212,7 +221,7 @@ input[type="checkbox"] ~ label:active {
     box-shadow: var(--shadow);
     border: none;
     border-radius: var(--border-radius);
-    color: var(--fundo-secundario);
+    color: var(--cor-escura-permanente);
     cursor: pointer;
     font-weight: bold;
 }
@@ -231,7 +240,7 @@ input[type="checkbox"] ~ label:active {
     background-color: var(--cor-destaque);
     padding: 10px 20px;
     border-radius: var(--border-radius);
-    color: var(--fundo-secundario);
+    color: var(--cor-escura-permanente);
     cursor: default;
     bottom: -100px;
     transition: 200ms;
@@ -251,14 +260,14 @@ input[type="checkbox"] ~ label:active {
 .conjunto-ativado > * {
     background-color: var(--cor-destaque);
     flex: 1;
-    color: var(--fundo-secundario);
+    color: var(--cor-escura-permanente);
     box-shadow: var(--shadow);
 }
 
 .conjunto-desativado > * {
     background-color: var(--fundo-principal);
     flex: 1;
-    color: var(--cor-fonte-fundo-escuro);
+    color: var(--cor-fonte);
     box-shadow: var(--shadow);
 }
 
@@ -317,7 +326,7 @@ input[type="checkbox"] ~ label:active {
 }
 
 #circulo-carregando {
-    border: 2px solid var(--cor-fonte-fundo-escuro);
+    border: 2px solid var(--cor-fonte);
     width: 35px;
     height: 35px;
     border-radius: 100%;
