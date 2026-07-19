@@ -21,6 +21,10 @@ let emailUsuario = document.getElementById("email-usuario");
 let areaUsuario = document.getElementById("area-usuario");
 let experienciaUsuario = document.getElementById("experiencia-usuario");
 let habilidadesUsuario = document.getElementById("habilidades-usuario");
+let fotoUsuario = document.getElementById("foto-usuario");
+
+fotoUsuario.src = usuarioAtual.hrefImagem || "./../../img/candidatos/default.svg";
+fotoUsuario.alt = `foto-${usuarioAtual.nome}`;
 
 nomeUsuario.textContent = usuarioAtual.nome;
 emailUsuario.textContent = usuarioAtual.email;

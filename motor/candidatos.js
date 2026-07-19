@@ -3,13 +3,14 @@
 // ==========================
 
 export class Candidato {
-  constructor(nome, area, email, senha, habilidades, experienciaMeses) {
+  constructor(nome, area, email, senha, habilidades, experienciaMeses, hrefImagem) {
     this.nome = nome;
     this.area = area;
     this.email = email;
     this.senha = senha;
     this.habilidades = habilidades;
     this.experienciaMeses = experienciaMeses;
+    this.hrefImagem = hrefImagem;
   }
 
   // Mostra um resumo das informações do candidato
@@ -52,6 +53,7 @@ async function buscarCandidatosSimulados() {
         senha: candidatoLocalStorage.senha,
         habilidades: candidatoLocalStorage.habilidades,
         experienciaMeses: candidatoLocalStorage.experiencia,
+        hrefImagem: candidatoLocalStorage.hrefImagem,
       };
 
       candidatos.push(candidato);
@@ -70,6 +72,7 @@ async function buscarCandidatosSimulados() {
               candidato.senha,
               candidato.habilidades,
               candidato.experienciaMeses,
+              candidato.hrefImagem,
             ),
         ),
       );

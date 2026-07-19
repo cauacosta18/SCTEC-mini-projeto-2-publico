@@ -326,7 +326,7 @@ input[type="checkbox"] ~ label:active {
 }
 
 #circulo-carregando {
-    border: 2px solid var(--cor-clara-permanente);
+    border: 2px solid var(--cor-fonte);
     width: 35px;
     height: 35px;
     border-radius: 100%;

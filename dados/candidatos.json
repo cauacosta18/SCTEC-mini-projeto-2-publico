@@ -10,7 +10,8 @@
       "Lógica de Programação",
       "Kanban"
     ],
-    "experienciaMeses": 3
+    "experienciaMeses": 3,
+    "hrefImagem": "./../../img/candidatos/ana.svg"
   },
   {
     "nome": "Carlos",
@@ -23,7 +24,8 @@
       "JavaScript",
       "React"
     ],
-    "experienciaMeses": 8
+    "experienciaMeses": 8,
+    "hrefImagem": "./../../img/candidatos/carlos.svg"
   },
   {
     "nome": "Marina",
@@ -35,7 +37,8 @@
       "GitHub",
       "Figma"
     ],
-    "experienciaMeses": 5
+    "experienciaMeses": 5,
+    "hrefImagem": "./../../img/candidatos/marina.svg"
   },
   {
     "nome": "Lucas",
@@ -48,7 +51,8 @@
       "React",
       "GitHub"
     ],
-    "experienciaMeses": 12
+    "experienciaMeses": 12,
+    "hrefImagem": "./../../img/candidatos/lucas.svg"
   },
   {
     "nome": "Fernanda",
@@ -61,7 +65,8 @@
       "Bootstrap",
       "Kanban"
     ],
-    "experienciaMeses": 2
+    "experienciaMeses": 2,
+    "hrefImagem": "./../../img/candidatos/fernanda.svg"
   },
   {
     "nome": "Rafael",
@@ -74,7 +79,8 @@
       "Git",
       "Lógica de Programação"
     ],
-    "experienciaMeses": 10
+    "experienciaMeses": 10,
+    "hrefImagem": "./../../img/candidatos/rafael.svg"
   },
   {
     "nome": "Juliana",
@@ -87,7 +93,8 @@
       "Kanban",
       "APIs"
     ],
-    "experienciaMeses": 6
+    "experienciaMeses": 6,
+    "hrefImagem": "./../../img/candidatos/juliana.svg"
   },
   {
     "nome": "Pedro",
@@ -100,6 +107,7 @@
       "Git",
       "SCRUM"
     ],
-    "experienciaMeses": 9
+    "experienciaMeses": 9,
+    "hrefImagem": "./../../img/candidatos/pedro.svg"
   }
 ]

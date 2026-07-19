@@ -58,6 +58,7 @@ let cadastro = {
     area: "nenhum",
     experiencia: "",
     habilidades: [],
+    hrefImagem: "",
 }
 
 function buscarCandidatosCadastradosLocalStorage() {
@@ -93,6 +94,9 @@ function buscarCadastro() {
         if (objeto.habilidades) {
             cadastro.habilidades = objeto.habilidades;
         }
+        if (objeto.hrefImagem) {
+            cadastro.hrefImagem = objeto.hrefImagem;
+        }
     }
 
 }
@@ -107,6 +111,15 @@ function atualizarForm () {
     }
     
     experiencia.value = cadastro.experiencia;
+
+    if (cadastro.hrefImagem) {
+        previewFoto.src = cadastro.hrefImagem;
+        previewFoto.alt = `foto-${cadastro.nome}`;
+        previewFoto.style.display = "block";
+
+        btnEscolherFoto.classList.add("foto-adicionada");
+        btnEscolherFoto.textContent = "Adicionar outra foto";
+    }
 
 }
 
@@ -159,6 +172,35 @@ email.addEventListener("change", ()=> {
     localStorage.setItem("cadastro", string);
 })
 let senha = document.getElementById("senha");
+
+let btnEscolherFoto = document.querySelector(".btn-escolher-foto")
+let foto = document.getElementById("foto");
+let previewFoto = document.getElementById("preview-foto");
+foto.addEventListener("change", () => {
+    
+    let arquivo = foto.files[0];
+
+    if (!arquivo) {
+        return;
+    }
+
+    let leitor = new FileReader();
+    leitor.onload = () => {
+        cadastro.hrefImagem = leitor.result;
+
+        previewFoto.src = cadastro.hrefImagem;
+        previewFoto.alt = `foto-${cadastro.nome}`;
+        previewFoto.style.display = "block";
+
+        let string = JSON.stringify(cadastro);
+        localStorage.setItem("cadastro", string);
+    }
+    leitor.readAsDataURL(arquivo);
+
+    btnEscolherFoto.classList.add("foto-adicionada");
+    btnEscolherFoto.textContent = "Adicionar outra foto";
+    ativarAlerta(alerta, "Foto carregada com sucesso")
+})
 
 let area = document.getElementById("area");
 area.addEventListener("change", ()=> {
@@ -305,7 +347,7 @@ function mudarEtapas() {
             etapa3.classList.remove("etapa-atual");      
             btnCadastro.style.display = "none";
             etapasCadastro.style.transform = `translateX(calc(-100% - 80px))`;            
-            etapasCadastro.style.height = `125px`;
+            etapasCadastro.style.height = `275px`;
             etapasCadastro.style.minHeight = ``;
             break;
             
@@ -367,6 +409,11 @@ let btnResetar = document.getElementById("btn-resetar");
 btnResetar.addEventListener("click", ()=>{
     etapaAtual = 1;
     mudarEtapas();
+
+    btnEscolherFoto.classList.remove("foto-adicionada");
+    btnEscolherFoto.textContent = "Escolha uma foto de perfil";
+    previewFoto.style.display = "none";
+    
 
     localStorage.removeItem("cadastro");
 

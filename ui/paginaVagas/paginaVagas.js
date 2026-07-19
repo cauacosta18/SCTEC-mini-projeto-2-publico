@@ -116,6 +116,21 @@ function separarVagas(vagasFiltradas) {
     return vagasDaPagina
 }
 
+function atualizarIndicadorPagina() {
+    if (!spansPaginas.length) {
+        spansPaginas = document.querySelectorAll(".span-pagina");
+    }
+
+    spansPaginas.forEach((spanPagina) => {
+        spanPagina.id = "";
+    });
+
+    const spanPaginaAtual = spansPaginas[paginaAtual - 1];
+    if (spanPaginaAtual) {
+        spanPaginaAtual.id = "pagina-atual";
+    }
+}
+
 function atualizarPaginacao(numVagas) {
     paginaAtual = 1;
     translateXAtual = 40;
@@ -129,7 +144,40 @@ function atualizarPaginacao(numVagas) {
     paginasDisponiveis.style.transform = `translateX(${translateXAtual}px)`;
 
     spansPaginas = document.querySelectorAll(".span-pagina");
-    spansPaginas[0].id = "pagina-atual"
+    atualizarIndicadorPagina();
+}
+
+function irParaPaginaDaVaga(indiceVaga) {
+    const indice = Number(indiceVaga);
+
+    if (Number.isNaN(indice)) {
+        return null;
+    }
+
+    const paginaVaga = Math.floor(indice / vagasPorPagina) + 1;
+
+    if (paginaAtual !== paginaVaga) {
+        paginaAtual = paginaVaga;
+        translateXAtual = 40 - (paginaAtual - 1) * 40;
+        paginasDisponiveis.style.transform = `translateX(${translateXAtual}px)`;
+
+
+        if (paginaAtual === 1) {
+            btnVoltarVagas.classList.add("btn-inativo")
+            btnAvancarVagas.classList.remove("btn-inativo")
+        } else if (paginaAtual === numeroDePaginas) {
+            btnVoltarVagas.classList.remove("btn-inativo")
+            btnAvancarVagas.classList.add("btn-inativo")
+        } else {
+            btnVoltarVagas.classList.remove("btn-inativo")
+            btnAvancarVagas.classList.remove("btn-inativo")
+        }
+
+        atualizarIndicadorPagina();
+        prepararVagas();
+    }
+
+    return document.querySelector(`.vaga[data-index="${indice}"]`);
 }
 
 function filtrarVagas() {
@@ -531,11 +579,15 @@ let vagaDestaque = document.getElementById("vaga-destaque");
 
 vagaDestaque.addEventListener("click", (event)=> {
     event.stopPropagation();
-    let vagaCorrespondente = sectionsVagas.find(sectionVaga => sectionVaga.dataset.index === vagaDestaque.dataset.index);
     vagaDestaque.classList.add("vaga-ativa");
-    
-    
-    
+
+    const vagaCorrespondente = irParaPaginaDaVaga(vagaDestaque.dataset.index);
+
+    if (!vagaCorrespondente) {
+        ativarAlerta(alerta, "Não foi possível abrir essa vaga no momento.");
+        return;
+    }
+
     acionarAnalise(vagaCorrespondente);
 })
 
@@ -660,10 +712,8 @@ let btnVoltarVagas = document.getElementById("btn-voltar-vagas");
 let numeroDePaginas;
 
 btnAvancarVagas.addEventListener("click", ()=>{
-    console.log(numeroDePaginas);
     
     if ((paginaAtual + 1) === numeroDePaginas) {
-        console.log(numeroDePaginas);
         btnAvancarVagas.classList.add("btn-inativo");
     } else {
         btnAvancarVagas.classList.remove("btn-inativo");
@@ -703,7 +753,6 @@ function vagasAvancarVoltar(avancar) {
         paginasDisponiveis.style.transform = `translateX(${translateXAtual}px)`;
         spansPaginas[paginaAtual - 1].id = "pagina-atual";
         spansPaginas[paginaAtual-2].id = "";
-        window.scrollTo(0,0);
         buscas.textContent = contarBuscas();
         
         prepararVagas();
@@ -717,7 +766,6 @@ function vagasAvancarVoltar(avancar) {
         paginasDisponiveis.style.transform = `translateX(${translateXAtual}px)`;
         spansPaginas[paginaAtual - 1].id = "pagina-atual";
         spansPaginas[paginaAtual].id = "";
-        window.scrollTo(0,0);
         buscas.textContent = contarBuscas();
         prepararVagas();
     }
