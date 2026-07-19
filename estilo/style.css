@@ -404,14 +404,8 @@ input[type="checkbox"] ~ label:active {
 /* ==========================
    Responsividade
    ========================== */
-@media (max-width: 768px) {
-    #alerta {
-        max-width: 80vw;
-        left: auto;
-    }
-}
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
 
     header, footer {
         flex-direction: column;
@@ -422,6 +416,11 @@ input[type="checkbox"] ~ label:active {
         align-items: center;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    #alerta {
+        max-width: 80vw;
+        left: auto;
     }
     
 }
