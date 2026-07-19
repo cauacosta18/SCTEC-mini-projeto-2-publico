@@ -223,7 +223,7 @@ input[type="checkbox"] ~ label:active {
     border-radius: var(--border-radius);
     color: var(--cor-escura-permanente);
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .btn-destaque:hover, #alerta:hover, a:hover {
@@ -247,6 +247,7 @@ input[type="checkbox"] ~ label:active {
     max-width: 40vw;
     box-shadow: var(--shadow);
     z-index: 9999;
+    font-weight: 700;
 }
 
 .conjunto {

@@ -119,6 +119,10 @@ function atualizarForm () {
 
         btnEscolherFoto.classList.add("foto-adicionada");
         btnEscolherFoto.textContent = "Adicionar outra foto";
+        let i = document.createElement("i");
+        i.classList.add("fa-solid");
+        i.classList.add("fa-file-arrow-down");
+        btnEscolherFoto.append(i)
     }
 
 }
@@ -199,6 +203,10 @@ foto.addEventListener("change", () => {
 
     btnEscolherFoto.classList.add("foto-adicionada");
     btnEscolherFoto.textContent = "Adicionar outra foto";
+    let i = document.createElement("i");
+    i.classList.add("fa-solid");
+    i.classList.add("fa-file-arrow-down");
+    btnEscolherFoto.append(i)
     ativarAlerta(alerta, "Foto carregada com sucesso")
 })
 
@@ -413,6 +421,10 @@ btnResetar.addEventListener("click", ()=>{
     btnEscolherFoto.classList.remove("foto-adicionada");
     btnEscolherFoto.textContent = "Escolha uma foto de perfil";
     previewFoto.style.display = "none";
+    let i = document.createElement("i");
+    i.classList.add("fa-solid");
+    i.classList.add("fa-file-arrow-down");
+    btnEscolherFoto.append(i)
     
 
     localStorage.removeItem("cadastro");

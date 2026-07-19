@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-O **SkillMatch JS** é um simulador de compatibilidade entre candidatos e vagas de desenvolvimento Front-End Júnior, desenvolvido em JavaScript puro.
+O **SkillMatch JS** é um simulador de compatibilidade entre candidatos e vagas de desenvolvimento Front-End Júnior, desenvolvido.
 
 O sistema compara as habilidades de um candidato com os requisitos exigidos pelas vagas cadastradas e apresenta:
 
@@ -13,7 +13,7 @@ O sistema compara as habilidades de um candidato com os requisitos exigidos pela
 - vaga mais compatível;
 - recomendações de estudo.
 
-O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no módulo de programação Front-End e está organizado em uma estrutura multi-página com fluxo de login, cadastro, perfil e vagas.
+O projeto foi desenvolvido com foco na prática dos principais conceitos estudados no módulo de programação e desenvolvimento Front-End e está organizado em uma estrutura multi-página com fluxo de login, cadastro, perfil e vagas.
 
 ## Link do Trello
 
@@ -72,23 +72,6 @@ O sistema exibe alertas e animações de carregamento para melhorar a experiênc
 
 ---
 
-## Requisitos atendidos
-
-Este projeto já contempla os principais requisitos esperados para o mini-projeto, incluindo:
-
-- login com validação de usuário;
-- cadastro de candidatos;
-- persistência de dados no localStorage;
-- tela de perfil do usuário;
-- tela de vagas com filtros e compatibilidade;
-- cálculo e classificação de compatibilidade;
-- uso de POO, arrays, callbacks, closures, Promises e async/await;
-- organização do código em módulos JavaScript.
-
-> Observação: o vídeo de apresentação ainda não está incluído no projeto.
-
----
-
 ## Conceitos utilizados
 
 O projeto foi desenvolvido utilizando conceitos de:
@@ -115,6 +98,9 @@ O projeto foi desenvolvido utilizando conceitos de:
 - Promises;
 - async/await;
 - fetch para carregar dados locais;
+- HTML 5
+- CSS 3
+- flexbox
 - LocalStorage;
 - Git e GitHub;
 - Kanban.
@@ -186,8 +172,8 @@ sctec-mini-projeto-2/
 ## Tecnologias utilizadas
 
 - JavaScript
-- HTML
-- CSS
+- HTML 5
+- CSS 3
 - Git
 - GitHub
 - VS Code
@@ -238,4 +224,4 @@ Todos os usuários utilizam a seguinte senha:
 
 ## Autor
 
-Projeto desenvolvido por Cauã Luiz Costa para o Mini-Projeto Avaliativo do módulo de Programação Front-End.
+Projeto desenvolvido por Cauã Luiz Costa para o Projeto Avaliativo do curso SCTEC na trilha de desenvolvimento de software módulo 1.

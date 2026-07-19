@@ -42,6 +42,10 @@
     cursor: pointer;
     text-align: center;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .foto-adicionada {
@@ -116,6 +120,11 @@
 #habilidades-cadastro > * {
     flex: 1;
     text-align: center;
+}
+
+i {
+    margin-left: 5px;
+    font-size: 20px;
 }
 
 /* ==========================

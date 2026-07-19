@@ -6,8 +6,6 @@
 
 ## A Fazer
 
-- Preparar vídeo de apresentação
-
 ---
 
 ## Em Andamento
@@ -45,3 +43,4 @@
 - Implementar funcionalidade de análise de compatibilidade
 - Criar fluxo de cadastro
 - Organizar arquivos do sistema
+- Preparar vídeo de apresentação
